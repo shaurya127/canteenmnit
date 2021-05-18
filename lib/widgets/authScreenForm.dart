@@ -98,7 +98,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              keyboardType: TextInputType.name,
+              keyboardType: TextInputType.phone,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
                 if (valueEnteredByUser.isEmpty &&
@@ -128,7 +128,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              keyboardType: TextInputType.name,
+              keyboardType: TextInputType.emailAddress,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
                 if (valueEnteredByUser.isEmpty &&
@@ -158,7 +158,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              keyboardType: TextInputType.name,
+              keyboardType: TextInputType.text,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
                 if (valueEnteredByUser.isEmpty &&
@@ -188,7 +188,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                   fontWeight: FontWeight.w300,
                 ),
               ),
-              keyboardType: TextInputType.name,
+              keyboardType: TextInputType.text,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
                 if (valueEnteredByUser.isEmpty &&
