@@ -11,11 +11,11 @@ class NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
 
   static const List<Widget> _options = <Widget>[
-    Text('Home', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-    Text('Search', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-    Text('Lists', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+    Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400,color: Colors.white,)),
+    Text('Search', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400,color: Colors.white,)),
+    Text('Lists', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400,color: Colors.white,)),
     Text('Profile',
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400,color: Colors.white,)),
   ];
 
   void _onItemTapped(int index) {
@@ -30,6 +30,9 @@ class NavigationBarState extends State<NavigationBar> {
         appBar: AppBar(
           title: _options.elementAt(_selectedIndex),
           toolbarHeight: 90,
+          // elevation: 1.0,
+            brightness: Brightness.dark,
+            backgroundColor: Colors.black,
         ),
         body: Center(
           child: Text(' '),
@@ -39,13 +42,14 @@ class NavigationBarState extends State<NavigationBar> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
+
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search_rounded),
                 label: 'Search',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.format_list_numbered),
+                icon: Icon(Icons.add_shopping_cart),
                 label: 'Order List',
               ),
               BottomNavigationBarItem(
@@ -54,11 +58,11 @@ class NavigationBarState extends State<NavigationBar> {
               ),
             ],
             type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.cyan,
+            backgroundColor: Colors.black,
             currentIndex: _selectedIndex,
-            selectedItemColor: Colors.white,
+            selectedItemColor: Colors.red,
             onTap: _onItemTapped,
-            unselectedItemColor: Colors.black,
+            unselectedItemColor: Colors.white,
             elevation: 1));
   }
 
