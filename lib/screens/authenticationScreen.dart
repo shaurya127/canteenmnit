@@ -6,22 +6,33 @@ import '../widgets/authScreenForm.dart';
 class AuthenticationScreen extends StatelessWidget {
   final titleOfApp;
 
-  AuthenticationScreen({this.titleOfApp});
+  AuthenticationScreen(this.titleOfApp);
 
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(titleOfApp),
-        ),
-        body: Container(
-          width: deviceSize.width,
+
+        // appBar: AppBar(
+        //     title: Text(
+        //       titleOfApp,
+        //       style: TextStyle(color: Colors.white),
+        //     ),
+        //     backgroundColor: Colors.blue[900],
+        //     brightness: Brightness.dark),
+        body: Padding(
+      padding: const EdgeInsets.only(top: 20),
+      child: Container(
+        width: deviceSize.width,
+        height: deviceSize.height,
+        color: Colors.blue[50],
+        child: Container(
           height: deviceSize.height,
-          color: Colors.blue[50],
+          alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
@@ -48,8 +59,9 @@ class AuthenticationScreen extends StatelessWidget {
                   ),
                   FlatButton.icon(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(HomeScreen.routeName);
+                      Navigator.of(context).pushReplacementNamed(
+                        HomeScreen.routeName,
+                      );
                     },
                     label: Text(
                       'Skip',
@@ -62,6 +74,8 @@ class AuthenticationScreen extends StatelessWidget {
               ],
             ),
           ),
-        ));
+        ),
+      ),
+    ));
   }
 }
