@@ -76,27 +76,4 @@ class CanteenItemHelp extends StatelessWidget {
     );
   }
 }
-// Positioned(
-// //this only work with stack
-// bottom: 20,
-// right: 5,
-// child: Container(
-// color: Colors.black54,
-// padding: EdgeInsets.symmetric(
-// vertical: 5,
-// horizontal: 10,
-// ),
-// width: 220,
-// child: Text(
-// title,
-// style: TextStyle(
-// fontSize: 24,
-// color: Colors.white,
-// ),
-// softWrap: true,
-// overflow: TextOverflow.fade,
-// ),
-// ),
-// ),
-// ],
-// ),
+
