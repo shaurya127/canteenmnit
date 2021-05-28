@@ -1,4 +1,4 @@
-import 'package:canteenmnit/screens/homeScreen.dart';
+import './homeScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/authScreenForm.dart';

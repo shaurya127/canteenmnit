@@ -1,3 +1,4 @@
+import './canteenItem.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -9,14 +10,38 @@ class NavigationBar extends StatefulWidget {
 
 class NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
-
+  List<Object> _pages;
   static const List<Widget> _options = <Widget>[
-    Text('Home', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-    Text('Search', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
-    Text('Lists', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
+    Text('Home',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w400,
+        )),
+    Text('Search',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w400,
+        )),
+    Text('Lists',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w400,
+        )),
     Text('Profile',
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400)),
   ];
+
+  @override
+  void initState() {
+    _pages = [
+      CanteenItem(),
+      null,
+      null,
+      null,
+    ];
+    // TODO: implement initState
+    super.initState();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -29,11 +54,9 @@ class NavigationBarState extends State<NavigationBar> {
     return Scaffold(
         appBar: AppBar(
           title: _options.elementAt(_selectedIndex),
-          toolbarHeight: 90,
+          toolbarHeight: 70,
         ),
-        body: Center(
-          child: Text(' '),
-        ),
+        body: _pages[_selectedIndex],
         bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
@@ -62,6 +85,6 @@ class NavigationBarState extends State<NavigationBar> {
             elevation: 1));
   }
 
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+   @override
+   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
