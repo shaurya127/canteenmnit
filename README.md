@@ -1,4 +1,4 @@
-# canteen_mnit
+# mnit_canteen
 
 A new Flutter project.
 

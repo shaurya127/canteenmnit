@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdminScreen extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   String _img = "";
   String _name = "";
@@ -42,14 +44,22 @@ class _AdminScreenState extends State<AdminScreen> {
     return null;
   }
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
+    setState(() {
+      _isLoading = true;
+    });
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      print(_img);
-      print(_name);
-      print("$_price Rs.");
-      print(_desc);
+      await Firestore.instance.collection('dishes').add({
+        'img': _img,
+        'name': _name,
+        'price': _price,
+        'description': _desc,
+      });
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -113,14 +123,16 @@ class _AdminScreenState extends State<AdminScreen> {
                         onSaved: (val) => _desc = val,
                       ),
                       SizedBox(height: 15),
-                      RaisedButton(
-                        child: Text("Add"),
-                        color: Theme.of(context).primaryColor,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        onPressed: _submitForm,
-                      ),
+                      _isLoading
+                          ? Center(child: CircularProgressIndicator())
+                          : RaisedButton(
+                              child: Text("Add"),
+                              color: Theme.of(context).primaryColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              onPressed: _submitForm,
+                            ),
                     ],
                   ),
                 ),
