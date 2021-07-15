@@ -1,16 +1,20 @@
-import 'package:canteenmnit/screens/authenticationScreen.dart';
-import 'package:canteenmnit/screens/homeScreen.dart';
-import 'package:canteenmnit/widgets/authScreenForm.dart';
+import './authenticationScreen.dart';
+import './homeScreen.dart';
+import '../widgets/authScreenForm.dart';
 import 'package:flutter/material.dart';
 
+
 class onboarding extends StatefulWidget {
+
+
+
   @override
   _onboardingState createState() => _onboardingState();
 }
 
 class _onboardingState extends State<onboarding> {
   int currentPage = 0;
-  final titleOfApp = "Canteen MNIT";
+  final titleOfApp="Canteen MNIT";
   PageController _pageController =
       new PageController(initialPage: 0, keepPage: true);
   @override
@@ -68,16 +72,12 @@ class _onboardingState extends State<onboarding> {
                             spreadRadius: 3)
                       ]),
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                        onTap: (){
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
                         },
                         child: Text(
                           "Get Started",
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
+                          style: TextStyle(fontSize: 16),
                         ),
                       ),
                     ),
@@ -86,12 +86,8 @@ class _onboardingState extends State<onboarding> {
                     height: 30,
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  AuthenticationScreen(titleOfApp)));
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationScreen(titleOfApp)));
                     },
                     child: Text(
                       "Login",

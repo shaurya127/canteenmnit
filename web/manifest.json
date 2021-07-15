@@ -1,6 +1,6 @@
 {
-    "name": "canteenmnit",
-    "short_name": "canteenmnit",
+    "name": "mnit_canteen",
+    "short_name": "mnit_canteen",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

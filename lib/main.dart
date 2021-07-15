@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:canteenmnit/screens/onboardingnewuser.dart';
 import 'package:flutter/material.dart';
 
+import './screens/onboardingnewuser.dart';
 import './screens/mainScreen.dart';
 import './screens/homeScreen.dart';
+import './screens/admin_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -52,9 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Duration(seconds: 3),
       () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(
-          builder: (context) =>onboarding()
-        ),
+        MaterialPageRoute(builder: (context) => onboarding()),
       ),
     );
   }
