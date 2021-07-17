@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Admin\\Desktop\\Flutter Projects\\projects\\canteenmnit copy\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\Admin\\Desktop\\Flutter Projects\\projects\\canteenmnit copy\\canteenmnit\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\f4a15a5606c9a028857d8a3e89eefa0f\\core-1.1.0\\res\\values\\values.xml",
@@ -78,6 +78,25 @@
                     }
                 },
                 {
+                    "source": "C:\\Users\\Admin\\Desktop\\Flutter Projects\\projects\\canteenmnit copy\\canteenmnit\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,830",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "472,996"
+                    },
+                    "to": {
+                        "startLines": "119,124",
+                        "startColumns": "4,4",
+                        "startOffsets": "8980,9277",
+                        "endLines": "123,126",
+                        "endColumns": "12,12",
+                        "endOffsets": "9272,9441"
+                    }
+                },
+                {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\44839bb2c2273d4740a7525da7c26a24\\jetified-play-services-basement-17.1.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "4,7",
@@ -95,7 +114,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Admin\\Desktop\\Flutter Projects\\projects\\canteenmnit copy\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "source": "C:\\Users\\Admin\\Desktop\\Flutter Projects\\projects\\canteenmnit copy\\canteenmnit\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
@@ -109,25 +128,6 @@
                         "startOffsets": "8183,8327,8409,8513,8622,8742,8837",
                         "endColumns": "143,81,103,108,119,94,71",
                         "endOffsets": "8322,8404,8508,8617,8737,8832,8904"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Admin\\Desktop\\Flutter Projects\\projects\\canteenmnit copy\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "176,830",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "472,996"
-                    },
-                    "to": {
-                        "startLines": "119,124",
-                        "startColumns": "4,4",
-                        "startOffsets": "8980,9277",
-                        "endLines": "123,126",
-                        "endColumns": "12,12",
-                        "endOffsets": "9272,9441"
                     }
                 }
             ]
