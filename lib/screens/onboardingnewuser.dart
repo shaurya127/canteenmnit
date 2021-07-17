@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 
 
 class onboarding extends StatefulWidget {
-
-
-
   @override
   _onboardingState createState() => _onboardingState();
 }
