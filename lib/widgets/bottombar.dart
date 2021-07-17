@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/userProfile.dart';
+import '../CanteenRelated/widgets/listOfCanteens.dart';
 
 class NavigationBar extends StatefulWidget {
   NavigationBar({Key key}) : super(key: key);
@@ -46,6 +47,10 @@ class NavigationBarState extends State<NavigationBar> {
 
   //Returns screen based on _selected index
   Widget getScreen() {
+    if (_selectedIndex == 0) {
+      return ListOfCanteens();
+    }
+
     if (_selectedIndex == 3) {
       return Center(
         child: UserProfile(

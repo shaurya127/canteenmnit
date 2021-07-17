@@ -6,6 +6,7 @@ import './screens/onboardingnewuser.dart';
 import './screens/mainScreen.dart';
 import './screens/homeScreen.dart';
 import './screens/admin_page.dart';
+import 'CanteenRelated/screens/particularCanteenOverview.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
               titleOfApp:
                   'Canteen MNIT', //Here optimization is required to avoid the name clash when we add furthur routes
             ),
+        ParticularCanteenOverview.routeName: (ctx) => ParticularCanteenOverview()
       },
     );
   }
