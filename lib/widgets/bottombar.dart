@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../widgets/userProfile.dart';
+import '../CanteenRelated/widgets/listOfCanteens.dart';
 
 class NavigationBar extends StatefulWidget {
-  NavigationBar({Key key}) : super(key: key);
+  NavigationBar({Key? key}) : super(key: key);
 
   @override
   NavigationBarState createState() => NavigationBarState();
@@ -11,11 +13,30 @@ class NavigationBarState extends State<NavigationBar> {
   int _selectedIndex = 0;
 
   static const List<Widget> _options = <Widget>[
-    Text('Home', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400,color: Colors.white,)),
-    Text('Search', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400,color: Colors.white,)),
-    Text('Lists', style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400,color: Colors.white,)),
+    Text('Home',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        )),
+    Text('Search',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        )),
+    Text('Order Lists',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        )),
     Text('Profile',
-        style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400,color: Colors.white,)),
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        )),
   ];
 
   void _onItemTapped(int index) {
@@ -24,25 +45,44 @@ class NavigationBarState extends State<NavigationBar> {
     });
   }
 
+  //Returns screen based on _selected index
+  Widget getScreen() {
+    if (_selectedIndex == 0) {
+      return ListOfCanteens();
+    }
+
+    if (_selectedIndex == 3) {
+      return Center(
+        child: UserProfile(
+          name: "Name",
+          email: "abc@xyz.com",
+          hostel: "Kabir Hostel",
+          roomNo: "82(c)",
+          urlOfImage: '',
+        ), //Test user
+      );
+    } else {
+      return Center(child: Text("To be filled"));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.lightBlue[50],
         appBar: AppBar(
           title: _options.elementAt(_selectedIndex),
           toolbarHeight: 90,
           // elevation: 1.0,
-            brightness: Brightness.dark,
-            backgroundColor: Colors.black,
+          brightness: Brightness.dark,
+          backgroundColor: Colors.black,
         ),
-        body: Center(
-          child: Text(' '),
-        ),
+        body: getScreen(),
         bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
-
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search_rounded),

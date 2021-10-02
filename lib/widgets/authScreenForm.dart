@@ -17,11 +17,11 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
 
   //Functions
   Future<void> submitForm() async {
-    if (!_formKey.currentState.validate()) {
+    if (!_formKey.currentState!.validate()) {
       //Invalid!
       return;
     }
-    _formKey.currentState.save();
+    _formKey.currentState!.save();
     //Here goes the signup logic
     //We can show any error occured here by pointing to _showErrorDialog
     return;
@@ -71,7 +71,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
               keyboardType: TextInputType.name,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
-                if (valueEnteredByUser.isEmpty &&
+                if (valueEnteredByUser!.isEmpty &&
                     valueEnteredByUser.length <= 2) {
                   return 'Invalid name!';
                 } else {
@@ -79,7 +79,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                 }
               },
               onSaved: (valueEnteredByUser) {
-                userName = valueEnteredByUser;
+                userName = valueEnteredByUser!;
               },
             ),
           ),
@@ -101,7 +101,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
               keyboardType: TextInputType.phone,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
-                if (valueEnteredByUser.isEmpty &&
+                if (valueEnteredByUser!.isEmpty &&
                     valueEnteredByUser.length <= 2) {
                   return 'Invalid name!';
                 } else {
@@ -109,7 +109,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                 }
               },
               onSaved: (valueEnteredByUser) {
-                userName = valueEnteredByUser;
+                userName = valueEnteredByUser!;
               },
             ),
           ),
@@ -131,7 +131,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
               keyboardType: TextInputType.emailAddress,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
-                if (valueEnteredByUser.isEmpty &&
+                if (valueEnteredByUser!.isEmpty &&
                     valueEnteredByUser.length <= 2) {
                   return 'Invalid name!';
                 } else {
@@ -139,7 +139,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                 }
               },
               onSaved: (valueEnteredByUser) {
-                userName = valueEnteredByUser;
+                userName = valueEnteredByUser!;
               },
             ),
           ),
@@ -161,7 +161,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
               keyboardType: TextInputType.text,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
-                if (valueEnteredByUser.isEmpty &&
+                if (valueEnteredByUser!.isEmpty &&
                     valueEnteredByUser.length <= 2) {
                   return 'Invalid name!';
                 } else {
@@ -169,7 +169,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                 }
               },
               onSaved: (valueEnteredByUser) {
-                userName = valueEnteredByUser;
+                userName = valueEnteredByUser!;
               },
             ),
           ),
@@ -191,7 +191,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
               keyboardType: TextInputType.text,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
-                if (valueEnteredByUser.isEmpty &&
+                if (valueEnteredByUser!.isEmpty &&
                     valueEnteredByUser.length <= 2) {
                   return 'Invalid name!';
                 } else {
@@ -199,7 +199,7 @@ class _AuthScreenFormState extends State<AuthScreenForm> {
                 }
               },
               onSaved: (valueEnteredByUser) {
-                userName = valueEnteredByUser;
+                userName = valueEnteredByUser!;
               },
             ),
           ),
