@@ -33,6 +33,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776397900878:android:e03b7d6407665e7b50c71f",
+        "android_client_info": {
+          "package_name": "com.example.mnit_canteen_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776397900878-vo2g5lupppp851usa6c4t98p535ounkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbrdGDXvefgPL1ppiUDu1RLhTBCvgWHec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776397900878-vo2g5lupppp851usa6c4t98p535ounkg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

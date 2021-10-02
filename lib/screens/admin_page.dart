@@ -1,6 +1,6 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AdminScreen extends StatefulWidget {
   @override
@@ -16,28 +16,28 @@ class _AdminScreenState extends State<AdminScreen> {
   String _price = "";
   String _desc = "";
 
-  String _validateImg(String val) {
+  String? _validateImg(String val) {
     if (val.isEmpty) {
       return "This field is required.";
     }
     return null;
   }
 
-  String _validateName(String val) {
+  String? _validateName(String val) {
     if (val.isEmpty) {
       return "This field is required.";
     }
     return null;
   }
 
-  String _validatePrice(String val) {
+  String? _validatePrice(String val) {
     if (val.isEmpty) {
       return "This field is required.";
     }
     return null;
   }
 
-  String _validateDesc(String val) {
+  String? _validateDesc(String val) {
     if (val.isEmpty) {
       return "This field is required.";
     }
@@ -48,9 +48,9 @@ class _AdminScreenState extends State<AdminScreen> {
     setState(() {
       _isLoading = true;
     });
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
-      await Firestore.instance.collection('dishes').add({
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      await FirebaseFirestore.instance.collection('dishes').add({
         'img': _img,
         'name': _name,
         'price': _price,
@@ -95,23 +95,23 @@ class _AdminScreenState extends State<AdminScreen> {
                       TextFormField(
                         key: ValueKey("img"),
                         decoration: InputDecoration(labelText: "Image URL"),
-                        validator: (val) => _validateImg(val),
-                        onSaved: (val) => _img = val,
+                        validator: (val) => _validateImg(val!),
+                        onSaved: (val) => _img = val!,
                       ),
                       TextFormField(
                         key: ValueKey("name"),
                         decoration: InputDecoration(labelText: "Name"),
                         textCapitalization: TextCapitalization.words,
-                        validator: (val) => _validateName(val),
-                        onSaved: (val) => _name = val,
+                        validator: (val) => _validateName(val!),
+                        onSaved: (val) => _name = val!,
                       ),
                       TextFormField(
                         key: ValueKey("price"),
                         decoration:
                             InputDecoration(labelText: "Price (in Rs.)"),
                         keyboardType: TextInputType.number,
-                        validator: (val) => _validatePrice(val),
-                        onSaved: (val) => _price = val,
+                        validator: (val) => _validatePrice(val!),
+                        onSaved: (val) => _price = val!,
                       ),
                       TextFormField(
                         key: ValueKey("desc"),
@@ -119,8 +119,8 @@ class _AdminScreenState extends State<AdminScreen> {
                         textCapitalization: TextCapitalization.sentences,
                         keyboardType: TextInputType.multiline,
                         maxLines: 2,
-                        validator: (val) => _validateDesc(val),
-                        onSaved: (val) => _desc = val,
+                        validator: (val) => _validateDesc(val!),
+                        onSaved: (val) => _desc = val!,
                       ),
                       SizedBox(height: 15),
                       _isLoading

@@ -5,10 +5,11 @@ class FastFoodWidget extends StatelessWidget {
   final String imageURL;
   final int cost;
 
-  FastFoodWidget(
-      {@required this.nameOfFastFood,
-      @required this.imageURL,
-      @required this.cost});
+  FastFoodWidget({
+    required this.nameOfFastFood,
+    required this.imageURL,
+    required this.cost,
+  });
 
   @override
   Widget build(BuildContext context) {

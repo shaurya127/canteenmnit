@@ -8,11 +8,11 @@ class UserProfile extends StatefulWidget {
   final String urlOfImage;
 
   UserProfile(
-      {@required this.name,
-      @required this.email,
-      @required this.hostel,
-      @required this.roomNo,
-      this.urlOfImage});
+      {required this.name,
+      required this.email,
+      required this.hostel,
+      required this.roomNo,
+      required this.urlOfImage});
 
   @override
   _UserProfileState createState() => _UserProfileState();
@@ -41,8 +41,8 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Widget fieldsInUserProfile(
-      [String field,
-      String userField,
+      [String field = "",
+      String userField = "",
       deviceSize,
       bool iconToBeIncluded = false]) {
     return Container(
@@ -83,7 +83,7 @@ class _UserProfileState extends State<UserProfile> {
                   decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     border: new Border.all(
-                      color: Colors.grey[200],
+                      color: (Colors.grey[200])!,
                       width: 5.0,
                     ),
                   ),
@@ -165,7 +165,7 @@ class _UserProfileState extends State<UserProfile> {
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Colors.blue[700]),
+                                        (Colors.blue[700])!),
                                 shape: MaterialStateProperty.all<
                                         RoundedRectangleBorder>(
                                     RoundedRectangleBorder(

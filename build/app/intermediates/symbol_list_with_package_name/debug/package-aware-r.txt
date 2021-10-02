@@ -1,4 +1,4 @@
-com.example.mnit_canteen
+com.example.mnit_canteen_app
 attr alpha
 attr buttonSize
 attr circleCrop

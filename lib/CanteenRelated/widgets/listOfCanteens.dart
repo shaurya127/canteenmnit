@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mnit_canteen/CanteenRelated/widgets/canteenDetailsOnMainScreen.dart';
+import '../../CanteenRelated/widgets/canteenDetailsOnMainScreen.dart';
 import '../../dummy_data.dart';
 
 class ListOfCanteens extends StatelessWidget {

@@ -3,7 +3,7 @@ import '../widgets/userProfile.dart';
 import '../CanteenRelated/widgets/listOfCanteens.dart';
 
 class NavigationBar extends StatefulWidget {
-  NavigationBar({Key key}) : super(key: key);
+  NavigationBar({Key? key}) : super(key: key);
 
   @override
   NavigationBarState createState() => NavigationBarState();
@@ -58,6 +58,7 @@ class NavigationBarState extends State<NavigationBar> {
           email: "abc@xyz.com",
           hostel: "Kabir Hostel",
           roomNo: "82(c)",
+          urlOfImage: '',
         ), //Test user
       );
     } else {

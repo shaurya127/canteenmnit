@@ -6,9 +6,7 @@ class OverviewOfThaliOnGrid extends StatelessWidget {
   final int cost;
 
   OverviewOfThaliOnGrid(
-      {@required this.nameOfThali,
-      @required this.imageURL,
-      @required this.cost});
+      {required this.nameOfThali, required this.imageURL, required this.cost});
 
   @override
   Widget build(BuildContext context) {

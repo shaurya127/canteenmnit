@@ -6,7 +6,7 @@ class CanteenDetailsOnMainScreen extends StatelessWidget {
   final String imageURL;
 
   CanteenDetailsOnMainScreen(
-      {@required this.nameOfCanteen, @required this.imageURL});
+      {required this.nameOfCanteen, required this.imageURL});
 
   void displayTheCanteen(BuildContext context) {
     Navigator.of(context).pushNamed(ParticularCanteenOverview.routeName,

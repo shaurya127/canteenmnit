@@ -3,7 +3,7 @@
     <string name="default_web_client_id" translatable="false">776397900878-vo2g5lupppp851usa6c4t98p535ounkg.apps.googleusercontent.com</string>
     <string name="gcm_defaultSenderId" translatable="false">776397900878</string>
     <string name="google_api_key" translatable="false">AIzaSyBbrdGDXvefgPL1ppiUDu1RLhTBCvgWHec</string>
-    <string name="google_app_id" translatable="false">1:776397900878:android:a16a90b0ddaabd7a50c71f</string>
+    <string name="google_app_id" translatable="false">1:776397900878:android:e03b7d6407665e7b50c71f</string>
     <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBbrdGDXvefgPL1ppiUDu1RLhTBCvgWHec</string>
     <string name="google_storage_bucket" translatable="false">canteenmnit.appspot.com</string>
     <string name="project_id" translatable="false">canteenmnit</string>

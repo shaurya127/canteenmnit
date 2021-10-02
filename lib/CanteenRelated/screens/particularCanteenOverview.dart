@@ -9,7 +9,7 @@ class ParticularCanteenOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     final routeArguments =
-        ModalRoute.of(context).settings.arguments as Map<String, String>;
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
     final nameOfCanteen = routeArguments['nameOfCanteen'];
     final imageURL = routeArguments['imageURL'];
 
@@ -17,7 +17,7 @@ class ParticularCanteenOverview extends StatelessWidget {
       backgroundColor: Colors.lightBlue[50],
       appBar: AppBar(
         title: Text(
-          nameOfCanteen,
+          nameOfCanteen!,
           style: TextStyle(color: Colors.white),
         ),
         brightness: Brightness.dark,
