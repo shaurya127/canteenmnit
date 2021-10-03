@@ -1,3 +1,5 @@
+import 'package:mnit_canteen_app/screens/admin_page.dart';
+
 import './authenticationScreen.dart';
 import './homeScreen.dart';
 import '../widgets/authScreenForm.dart';
@@ -72,7 +74,8 @@ class _onboardingState extends State<onboarding> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
+                                  builder: (context) =>
+                                      AuthenticationScreen(titleOfApp)));
                         },
                         child: Text(
                           "Get Started",
@@ -89,11 +92,10 @@ class _onboardingState extends State<onboarding> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  AuthenticationScreen(titleOfApp)));
+                              builder: (context) => AdminScreen()));
                     },
                     child: Text(
-                      "Login",
+                      "Login as admin",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -128,16 +130,19 @@ class _onboardingState extends State<onboarding> {
         SizedBox(
           height: 30,
         ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(140),
-          child: Container(
-            height: 280,
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(50),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/$img.jfif'),
-                fit: BoxFit.fill,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(140),
+            child: Container(
+              height: 280,
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(50),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/$img.jfif'),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),

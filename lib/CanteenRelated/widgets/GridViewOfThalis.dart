@@ -8,22 +8,15 @@ class GridViewOfThalis extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Container(
-      height:
-          100, //Here optimization required so that height of container is same as the content
-      child: GridView(
-          padding: const EdgeInsets.all(10),
-          children: List_of_thalis_from_annapurna.map(
-              (thaliInfo) => OverviewOfThaliOnGrid(
-                    nameOfThali: thaliInfo.name,
-                    imageURL: thaliInfo.imageURL,
-                    cost: thaliInfo.cost,
-                  )).toList(),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 100,
-            childAspectRatio: 3 / 3,
-            mainAxisSpacing: 20,
-            crossAxisSpacing: 10,
-          )),
-    );
+        height: deviceSize.width * 0.53,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (ctx, i) => OverviewOfThaliOnGrid(
+            nameOfThali: List_of_thalis_from_annapurna[i].name,
+            imageURL: List_of_thalis_from_annapurna[i].imageURL,
+            cost: List_of_thalis_from_annapurna[i].cost,
+          ),
+          itemCount: 3,
+        ));
   }
 }
