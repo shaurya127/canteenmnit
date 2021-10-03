@@ -25,9 +25,9 @@ class ParticularCanteenOverview extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Container(
+          padding: EdgeInsets.all(10),
           height: deviceSize.height,
           width: deviceSize.width,
-          // transformAlignment: AlignmentGeometry(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

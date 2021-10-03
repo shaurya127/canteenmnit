@@ -13,16 +13,9 @@ class HomeScreen extends StatelessWidget {
     //Here is the main home screen of the app
     return Scaffold(
       extendBody: true, // very important as noted
-      bottomNavigationBar: NavigationBar(),
+      // bottomNavigationBar: NavigationBar(),
       backgroundColor: Colors.blue[50],
-
-      body: FutureBuilder(
-          builder: (ctx, snapshot) =>
-              snapshot.connectionState == ConnectionState.waiting
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Center(child: Text("Home Screen"))),
+      body: NavigationBar(),
     );
   }
 }

@@ -130,56 +130,41 @@ class _UserProfileState extends State<UserProfile> {
             ),
           ),
           Expanded(
-            child: Stack(
+            child: Column(
               children: [
-                Positioned(
-                  left: deviceSize.width * 0.05,
-                  width: deviceSize.width * 0.9,
-                  bottom: 30,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Do you like this application?',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              TextButton(
-                                child: Text("Yes"),
-                                onPressed: () {},
-                                style: TextButton.styleFrom(
-                                  padding: EdgeInsets.all(0),
-                                ),
-                              ),
-                              TextButton(child: Text("No"), onPressed: () {}),
-                            ],
-                          )
-                        ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Do you like this application?',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    TextButton(
+                      child: Text("Yes"),
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.all(0),
                       ),
-                      Center(
-                          child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        (Colors.blue[700])!),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                )),
-                              ),
-                              child: Text(
-                                "Rate this application",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              onPressed: () {}))
-                    ],
-                  ),
+                    ),
+                    TextButton(child: Text("No"), onPressed: () {}),
+                  ],
                 ),
+                Center(
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              (Colors.blue[700])!),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          )),
+                        ),
+                        child: Text(
+                          "Rate this application",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        onPressed: () {}))
               ],
             ),
           ),

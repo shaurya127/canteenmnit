@@ -36,9 +36,10 @@ class OverviewOfThaliOnGrid extends StatelessWidget {
                   )),
             ),
             decoration: BoxDecoration(
+                border: Border.all(width: 5),
                 image: DecorationImage(
                   image: AssetImage(imageURL),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
                 borderRadius: BorderRadius.circular(10)),
           ),

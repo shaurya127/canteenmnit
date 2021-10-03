@@ -3,7 +3,6 @@ import './homeScreen.dart';
 import '../widgets/authScreenForm.dart';
 import 'package:flutter/material.dart';
 
-
 class onboarding extends StatefulWidget {
   @override
   _onboardingState createState() => _onboardingState();
@@ -11,7 +10,7 @@ class onboarding extends StatefulWidget {
 
 class _onboardingState extends State<onboarding> {
   int currentPage = 0;
-  final titleOfApp="Canteen MNIT";
+  final titleOfApp = "Canteen MNIT";
   PageController _pageController =
       new PageController(initialPage: 0, keepPage: true);
   @override
@@ -69,8 +68,11 @@ class _onboardingState extends State<onboarding> {
                             spreadRadius: 3)
                       ]),
                       child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomeScreen()));
                         },
                         child: Text(
                           "Get Started",
@@ -83,8 +85,12 @@ class _onboardingState extends State<onboarding> {
                     height: 30,
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationScreen(titleOfApp)));
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  AuthenticationScreen(titleOfApp)));
                     },
                     child: Text(
                       "Login",
