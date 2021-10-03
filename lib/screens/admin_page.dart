@@ -50,7 +50,7 @@ class _AdminScreenState extends State<AdminScreen> {
     });
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      await Firestore.instance.collection('dishes').add({
+      await FirebaseFirestore.instance.collection('dishes').add({
         'img': _img,
         'name': _name,
         'price': _price,

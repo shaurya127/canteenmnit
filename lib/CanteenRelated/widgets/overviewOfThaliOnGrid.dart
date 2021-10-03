@@ -11,43 +11,57 @@ class OverviewOfThaliOnGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
-            child: InkWell(
-              splashColor: Colors.blue[100],
-              child: Container(
-                  alignment: Alignment.bottomCenter,
+            padding: const EdgeInsets.all(5),
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
                   child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 4),
+                    height: 150,
+                    width: 150,
                     decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10)),
-                    padding: const EdgeInsets.all(5),
-                    child: Text(
-                      nameOfThali,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10),
+                      image: DecorationImage(
+                        image: AssetImage(imageURL),
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  )),
-            ),
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(imageURL),
-                  fit: BoxFit.cover,
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(10)),
+                InkWell(
+                  splashColor: Colors.blue[100],
+                  child: Container(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.all(5),
+                        child: Text(
+                          nameOfThali,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15),
+                        ),
+                      )),
+                ),
+              ],
+            ),
           ),
           Text(
             'Rs $cost/-',
             style: TextStyle(
               color: Colors.blue,
               fontWeight: FontWeight.w600,
-              fontSize: 10,
+              fontSize: 15,
             ),
           )
         ],

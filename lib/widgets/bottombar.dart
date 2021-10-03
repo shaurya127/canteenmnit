@@ -72,7 +72,7 @@ class NavigationBarState extends State<NavigationBar> {
         backgroundColor: Colors.lightBlue[50],
         appBar: AppBar(
           title: _options.elementAt(_selectedIndex),
-          toolbarHeight: 90,
+          // toolbarHeight: 90,
           // elevation: 1.0,
           brightness: Brightness.dark,
           backgroundColor: Colors.black,

@@ -1,8 +1,9 @@
+import 'package:mnit_canteen_app/screens/admin_page.dart';
+
 import './authenticationScreen.dart';
 import './homeScreen.dart';
 import '../widgets/authScreenForm.dart';
 import 'package:flutter/material.dart';
-
 
 class onboarding extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class onboarding extends StatefulWidget {
 
 class _onboardingState extends State<onboarding> {
   int currentPage = 0;
-  final titleOfApp="Canteen MNIT";
+  final titleOfApp = "Canteen MNIT";
   PageController _pageController =
       new PageController(initialPage: 0, keepPage: true);
   @override
@@ -69,8 +70,12 @@ class _onboardingState extends State<onboarding> {
                             spreadRadius: 3)
                       ]),
                       child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      AuthenticationScreen(titleOfApp)));
                         },
                         child: Text(
                           "Get Started",
@@ -83,11 +88,14 @@ class _onboardingState extends State<onboarding> {
                     height: 30,
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>AuthenticationScreen(titleOfApp)));
+                    onTap: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdminScreen()));
                     },
                     child: Text(
-                      "Login",
+                      "Login as admin",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -122,16 +130,19 @@ class _onboardingState extends State<onboarding> {
         SizedBox(
           height: 30,
         ),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(140),
-          child: Container(
-            height: 280,
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(50),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/$img.jfif'),
-                fit: BoxFit.fill,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(140),
+            child: Container(
+              height: 280,
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(50),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/$img.jfif'),
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
           ),
