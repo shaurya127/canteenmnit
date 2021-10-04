@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
               titleOfApp:
                   'Canteen MNIT', //Here optimization is required to avoid the name clash when we add furthur routes
             ),
-        ParticularCanteenOverview.routeName: (ctx) => ParticularCanteenOverview()
+        ParticularCanteenOverview.routeName: (ctx) =>
+            ParticularCanteenOverview()
       },
     );
   }
@@ -63,13 +64,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.cyan[50],
-      body: Container(
-        // color: Colors.white,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Canteenmnit.jpg'),
-          ),
+      backgroundColor: Colors.cyan[100],
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Image(
+          image: AssetImage('assets/images/Canteenmnit.jpg'),
+          fit: BoxFit.cover,
         ),
       ),
     );
