@@ -19,6 +19,13 @@ class MyApp extends StatelessWidget {
       title: 'Canteen MNIT',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
+        appBarTheme: AppBarTheme(
+          color: Colors.black,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
       ),
       home: MyHomePage(
         titleOfApp:
