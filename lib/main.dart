@@ -26,6 +26,14 @@ class MyApp extends StatelessWidget {
             fontSize: 20,
           ),
         ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.black,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+        scaffoldBackgroundColor: Colors.cyan[50],
       ),
       home: MyHomePage(
         titleOfApp:

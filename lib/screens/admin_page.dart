@@ -127,10 +127,6 @@ class _AdminScreenState extends State<AdminScreen> {
                           ? Center(child: CircularProgressIndicator())
                           : RaisedButton(
                               child: Text("Add"),
-                              color: Theme.of(context).primaryColor,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
                               onPressed: _submitForm,
                             ),
                     ],

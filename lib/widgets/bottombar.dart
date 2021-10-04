@@ -49,7 +49,6 @@ class NavigationBarState extends State<NavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
       appBar: AppBar(
         title: Text(_options.elementAt(_selectedIndex)!),
       ),
