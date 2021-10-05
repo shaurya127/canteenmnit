@@ -1,5 +1,15 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
+import './screens/onboardingnewuser.dart';
+import 'CanteenRelated/screens/particularCanteenOverview.dart';
+
+import './Routes/Routes.dart';
+import './AdminRelated/authentication.dart';
+import './AdminRelated/admin_screen.dart';
+import './screens/authenticationScreen.dart';
+import './screens/homeScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,17 +19,49 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Splash Screen',
+      title: 'Canteen MNIT',
       theme: ThemeData(
         primarySwatch: Colors.cyan,
+        appBarTheme: AppBarTheme(
+          color: Colors.black,
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.black,
+          textTheme: ButtonTextTheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+        scaffoldBackgroundColor: Colors.cyan[50],
       ),
-      home: MyHomePage(),
+      home: MyHomePage(
+        titleOfApp:
+            'Canteen MNIT', //From here you can change the title of the app
+      ),
       debugShowCheckedModeBanner: false,
+      routes: {
+        Routes.boardingPage: (ctx) => onboarding(),
+        Routes.adminLogin: (ctx) => AdminAuthentication(),
+        Routes.adminScreen: (ctx) => AdminScreen(),
+        Routes.mainLogin: (ctx) => AuthenticationScreen(),
+        Routes.homeScreen: (ctx) => HomeScreen(),
+        Routes.canteenDetail: (ctx) => ParticularCanteenOverview(),
+      },
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
+  final titleOfApp;
+  final icon;
+  final label;
+
+  MyHomePage({this.titleOfApp, this.icon, this.label});
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -29,38 +71,23 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SecondScreen())));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.cyan[50],
-      body: Container(
-        // color: Colors.white,
-
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Canteenmnit.jpg'),
-          ),
-        ),
-      ),
+      Duration(seconds: 3),
+      () => Navigator.pushReplacementNamed(context, Routes.boardingPage),
     );
   }
-}
 
-class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: null),
-      body: Center(
-          child: Text(
-        "Login Page",
-        textScaleFactor: 2,
-      )),
+      backgroundColor: Colors.cyan[100],
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Image(
+          image: AssetImage('assets/images/Canteenmnit.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
     );
   }
 }
