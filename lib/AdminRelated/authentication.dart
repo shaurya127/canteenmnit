@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import './AdminAuthForm.dart';
-import './admin_page.dart';
+
+import '../Routes/Routes.dart';
 
 class AdminAuthentication extends StatelessWidget {
   @override
@@ -43,12 +44,7 @@ class AdminAuthentication extends StatelessWidget {
                 ),
                 FlatButton.icon(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AdminScreen(),
-                      ),
-                    );
+                    Navigator.pushReplacementNamed(context, Routes.adminScreen);
                   },
                   label: Text(
                     'Skip',

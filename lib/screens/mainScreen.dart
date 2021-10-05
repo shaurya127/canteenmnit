@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : AuthenticationScreen(titleOfApp),
+              : AuthenticationScreen(),
     );
   }
 }

@@ -3,8 +3,6 @@ import '../widgets/ListViewOfFastFood.dart';
 import '../widgets/GridViewOfThalis.dart';
 
 class ParticularCanteenOverview extends StatelessWidget {
-  static const routeName = '/particular-canteen-overview';
-
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;

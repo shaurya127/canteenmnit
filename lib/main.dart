@@ -3,9 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import './screens/onboardingnewuser.dart';
-import './screens/mainScreen.dart';
-import './screens/homeScreen.dart';
 import 'CanteenRelated/screens/particularCanteenOverview.dart';
+
+import './Routes/Routes.dart';
+import './AdminRelated/authentication.dart';
+import './AdminRelated/admin_screen.dart';
+import './screens/authenticationScreen.dart';
+import './screens/homeScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,12 +44,12 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       routes: {
-        HomeScreen.routeName: (ctx) => HomeScreen(
-              titleOfApp:
-                  'Canteen MNIT', //Here optimization is required to avoid the name clash when we add furthur routes
-            ),
-        ParticularCanteenOverview.routeName: (ctx) =>
-            ParticularCanteenOverview()
+        Routes.boardingPage: (ctx) => onboarding(),
+        Routes.adminLogin: (ctx) => AdminAuthentication(),
+        Routes.adminScreen: (ctx) => AdminScreen(),
+        Routes.mainLogin: (ctx) => AuthenticationScreen(),
+        Routes.homeScreen: (ctx) => HomeScreen(),
+        Routes.canteenDetail: (ctx) => ParticularCanteenOverview(),
       },
     );
   }
@@ -68,10 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => onboarding()),
-      ),
+      () => Navigator.pushReplacementNamed(context, Routes.boardingPage),
     );
   }
 

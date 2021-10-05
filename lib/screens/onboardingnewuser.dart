@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './authenticationScreen.dart';
-import '../AdminRelated/authentication.dart';
+import '../Routes/Routes.dart';
 
 class onboarding extends StatefulWidget {
   @override
@@ -70,11 +69,10 @@ class _onboardingState extends State<onboarding> {
                       ]),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      AuthenticationScreen(titleOfApp)));
+                          Navigator.pushReplacementNamed(
+                            context,
+                            Routes.mainLogin,
+                          );
                         },
                         child: Text(
                           "Get Started",
@@ -88,10 +86,10 @@ class _onboardingState extends State<onboarding> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AdminAuthentication()));
+                      Navigator.pushReplacementNamed(
+                        context,
+                        Routes.adminLogin,
+                      );
                     },
                     child: Text(
                       "Login as admin",

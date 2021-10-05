@@ -1,25 +1,15 @@
-import './homeScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/authScreenForm.dart';
 
+import '../Routes/Routes.dart';
+
 class AuthenticationScreen extends StatelessWidget {
-  final titleOfApp;
-
-  AuthenticationScreen(this.titleOfApp);
-
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        // appBar: AppBar(
-        //     title: Text(
-        //       titleOfApp,
-        //       style: TextStyle(color: Colors.white),
-        //     ),
-        //     backgroundColor: Colors.blue[900],
-        //     brightness: Brightness.dark),
         body: Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Container(
@@ -55,7 +45,7 @@ class AuthenticationScreen extends StatelessWidget {
                 FlatButton.icon(
                   onPressed: () {
                     Navigator.of(context).pushReplacementNamed(
-                      HomeScreen.routeName,
+                      Routes.homeScreen,
                     );
                   },
                   label: Text(
