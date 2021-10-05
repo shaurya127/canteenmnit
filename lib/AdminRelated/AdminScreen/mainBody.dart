@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import '../widgets/userProfile.dart';
-import '../CanteenRelated/widgets/listOfCanteens.dart';
 
-class NavigationBar extends StatefulWidget {
-  NavigationBar({Key? key}) : super(key: key);
+import '../add_dish.dart';
+import '../../widgets/userProfile.dart';
+
+class MainAdminBody extends StatefulWidget {
+  MainAdminBody({Key? key}) : super(key: key);
 
   @override
-  NavigationBarState createState() => NavigationBarState();
+  MainAdminBodyState createState() => MainAdminBodyState();
 }
 
-class NavigationBarState extends State<NavigationBar> {
+class MainAdminBodyState extends State<MainAdminBody> {
   int _selectedIndex = 0;
 
   static const List<String?> _options = [
-    'Home',
-    'Search',
-    'Order Lists',
-    'Profile'
+    'Orders',
+    'Add Dish',
+    'Profile',
   ];
 
   void _onItemTapped(int index) {
@@ -27,11 +27,9 @@ class NavigationBarState extends State<NavigationBar> {
 
   //Returns screen based on _selected index
   Widget getScreen() {
-    if (_selectedIndex == 0) {
-      return ListOfCanteens();
-    }
-
-    if (_selectedIndex == 3) {
+    if (_selectedIndex == 1) {
+      return AddDish();
+    } else if (_selectedIndex == 2) {
       return Center(
         child: UserProfile(
           name: "Name",
@@ -56,16 +54,12 @@ class NavigationBarState extends State<NavigationBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search_rounded),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.add_shopping_cart),
-            label: 'Order List',
+            label: "Orders",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: "Add Dish",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box_sharp),

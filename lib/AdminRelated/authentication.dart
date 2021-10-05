@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/authScreenForm.dart';
+import './AdminAuthForm.dart';
 
 import '../Routes/Routes.dart';
 
-class AuthenticationScreen extends StatelessWidget {
+class AdminAuthentication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -33,20 +33,18 @@ class AuthenticationScreen extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  'Student Side',
+                  'Admin Side',
                   style: TextStyle(fontSize: 15, color: Colors.blue[900]),
                 ),
               ),
               Column(children: [
-                AuthScreenForm(),
+                AdminAuthForm(),
                 SizedBox(
                   height: 10,
                 ),
                 FlatButton.icon(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(
-                      Routes.homeScreen,
-                    );
+                    Navigator.pushReplacementNamed(context, Routes.adminScreen);
                   },
                   label: Text(
                     'Skip',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../screens/particularCanteenOverview.dart';
+
+import '../../Routes/Routes.dart';
 
 class CanteenDetailsOnMainScreen extends StatelessWidget {
   final String nameOfCanteen;
@@ -9,8 +10,10 @@ class CanteenDetailsOnMainScreen extends StatelessWidget {
       {required this.nameOfCanteen, required this.imageURL});
 
   void displayTheCanteen(BuildContext context) {
-    Navigator.of(context).pushNamed(ParticularCanteenOverview.routeName,
-        arguments: {'nameOfCanteen': nameOfCanteen, 'imageURL': imageURL});
+    Navigator.of(context).pushNamed(
+      Routes.canteenDetail,
+      arguments: {'nameOfCanteen': nameOfCanteen, 'imageURL': imageURL},
+    );
   }
 
   @override

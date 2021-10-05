@@ -1,9 +1,6 @@
-import 'package:mnit_canteen_app/screens/admin_page.dart';
-
-import './authenticationScreen.dart';
-import './homeScreen.dart';
-import '../widgets/authScreenForm.dart';
 import 'package:flutter/material.dart';
+
+import '../Routes/Routes.dart';
 
 class onboarding extends StatefulWidget {
   @override
@@ -18,6 +15,7 @@ class _onboardingState extends State<onboarding> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Column(
@@ -71,11 +69,10 @@ class _onboardingState extends State<onboarding> {
                       ]),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      AuthenticationScreen(titleOfApp)));
+                          Navigator.pushReplacementNamed(
+                            context,
+                            Routes.mainLogin,
+                          );
                         },
                         child: Text(
                           "Get Started",
@@ -89,10 +86,10 @@ class _onboardingState extends State<onboarding> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AdminScreen()));
+                      Navigator.pushReplacementNamed(
+                        context,
+                        Routes.adminLogin,
+                      );
                     },
                     child: Text(
                       "Login as admin",
