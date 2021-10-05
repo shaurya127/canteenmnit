@@ -1,9 +1,7 @@
-import 'package:mnit_canteen_app/screens/admin_page.dart';
+import 'package:flutter/material.dart';
 
 import './authenticationScreen.dart';
-import './homeScreen.dart';
-import '../widgets/authScreenForm.dart';
-import 'package:flutter/material.dart';
+import '../AdminRelated/authentication.dart';
 
 class onboarding extends StatefulWidget {
   @override
@@ -93,7 +91,7 @@ class _onboardingState extends State<onboarding> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AdminScreen()));
+                              builder: (context) => AdminAuthentication()));
                     },
                     child: Text(
                       "Login as admin",

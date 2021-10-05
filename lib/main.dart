@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import './screens/onboardingnewuser.dart';
 import './screens/mainScreen.dart';
 import './screens/homeScreen.dart';
-import './screens/admin_page.dart';
 import 'CanteenRelated/screens/particularCanteenOverview.dart';
 
 void main() {
