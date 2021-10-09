@@ -10,6 +10,7 @@ class OverviewOfThaliOnGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -24,8 +25,8 @@ class OverviewOfThaliOnGrid extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 4),
-                    height: 150,
-                    width: 150,
+                    height: deviceSize.height * 0.17,
+                    width: deviceSize.width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(imageURL),
