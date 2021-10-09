@@ -30,7 +30,7 @@ final List_of_thalis_from_annapurna = [
 ];
 
 //Later on, modify this to have id which comes from firebase
-final List_of_all_fast_food=[
+final List_of_all_fast_food = [
   FastFoodOverview(
     name: 'Kachori',
     imageURL: 'assets/images/kachori.png',

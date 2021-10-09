@@ -22,7 +22,8 @@ class ParticularCanteenOverview extends StatelessWidget {
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
       ),
-      body: Container(
+      body: SingleChildScrollView(
+        child: Container(
           padding: EdgeInsets.all(10),
           height: deviceSize.height,
           width: deviceSize.width,
@@ -55,7 +56,9 @@ class ParticularCanteenOverview extends StatelessWidget {
               ),
               ListViewOfFastFood(),
             ],
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
