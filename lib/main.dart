@@ -8,7 +8,9 @@ import 'CanteenRelated/screens/particularCanteenOverview.dart';
 import './Routes/Routes.dart';
 import './AdminRelated/authentication.dart';
 import './AdminRelated/admin_screen.dart';
-import './screens/authenticationScreen.dart';
+import 'AuthRelated/mainAuth.dart';
+import 'AuthRelated/mainDetails.dart';
+import 'AuthRelated/selectType.dart';
 import './screens/homeScreen.dart';
 
 void main() {
@@ -37,6 +39,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         scaffoldBackgroundColor: Colors.cyan[50],
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: Theme.of(context).errorColor,
+        ),
       ),
       home: MyHomePage(
         titleOfApp:
@@ -47,7 +52,9 @@ class MyApp extends StatelessWidget {
         Routes.boardingPage: (ctx) => onboarding(),
         Routes.adminLogin: (ctx) => AdminAuthentication(),
         Routes.adminScreen: (ctx) => AdminScreen(),
-        Routes.mainLogin: (ctx) => AuthenticationScreen(),
+        Routes.selectAuth: (ctx) => SelectAuth(),
+        Routes.mainAuth: (ctx) => MainAuth(),
+        Routes.mainDetails: (ctx) => MainDetail(),
         Routes.homeScreen: (ctx) => HomeScreen(),
         Routes.canteenDetail: (ctx) => ParticularCanteenOverview(),
       },
