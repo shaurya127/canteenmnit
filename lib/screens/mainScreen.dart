@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'authenticationScreen.dart';
+import '../AuthRelated/mainDetails.dart';
 
 class MainScreen extends StatelessWidget {
   final titleOfApp;
@@ -15,7 +15,7 @@ class MainScreen extends StatelessWidget {
               ? Center(
                   child: CircularProgressIndicator(),
                 )
-              : AuthenticationScreen(),
+              : MainDetail(),
     );
   }
 }

@@ -63,6 +63,7 @@ class _AddDishState extends State<AddDish> {
         'price': _price,
         'description': _desc,
       });
+      _formKey.currentState!.reset();
     }
     setState(() {
       _isLoading = false;
@@ -73,8 +74,9 @@ class _AddDishState extends State<AddDish> {
     String hintText,
     TextInputType inputType,
     Function validator,
-    Function onSaved,
-  ) {
+    Function onSaved, {
+    TextCapitalization txtCapitalization: TextCapitalization.none,
+  }) {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -91,6 +93,7 @@ class _AddDishState extends State<AddDish> {
           ),
         ),
         keyboardType: inputType,
+        textCapitalization: txtCapitalization,
         style: TextStyle(color: Colors.pink[900]),
         validator: (val) => validator(val),
         onSaved: (val) => onSaved(val),
@@ -117,6 +120,7 @@ class _AddDishState extends State<AddDish> {
                 TextInputType.name,
                 _validateName,
                 (val) => {_name = val},
+                txtCapitalization: TextCapitalization.words,
               ),
               getFormInput(
                 "Price (in Rs)",
@@ -129,6 +133,7 @@ class _AddDishState extends State<AddDish> {
                 TextInputType.text,
                 _validateDesc,
                 (val) => {_desc = val},
+                txtCapitalization: TextCapitalization.sentences,
               ),
               SizedBox(
                 height: 30,

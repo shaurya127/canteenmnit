@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_state.dart';
 import 'package:flutter/material.dart';
 
 import '../../dummy_data.dart';
@@ -10,6 +11,10 @@ class GridViewOfThalis extends StatefulWidget {
 }
 
 class _GridViewOfThalisState extends State<GridViewOfThalis> {
+  CarouselController _controller = CarouselController();
+  final carouselKey = GlobalKey<CarouselSliderState>();
+  int _curPage = 0;
+
   final List<Widget> thalis =
       List_of_thalis_from_annapurna.map((thali) => OverviewOfThaliOnGrid(
             nameOfThali: thali.name,
@@ -19,8 +24,12 @@ class _GridViewOfThalisState extends State<GridViewOfThalis> {
 
   @override
   Widget build(BuildContext context) {
-    CarouselController _controller = CarouselController();
     final deviceSize = MediaQuery.of(context).size;
+
+    void changeInd(double? ind) {
+      _curPage = (ind!.toInt() % 10000) % 3;
+      setState(() {});
+    }
 
     return Container(
       height: deviceSize.width * 0.7,
@@ -31,9 +40,12 @@ class _GridViewOfThalisState extends State<GridViewOfThalis> {
               enlargeCenterPage: true,
               scrollDirection: Axis.horizontal,
               autoPlay: true,
+              onScrolled: (ind) => changeInd(ind),
+              initialPage: _curPage,
             ),
             carouselController: _controller,
             items: thalis,
+            key: carouselKey,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -43,8 +55,10 @@ class _GridViewOfThalisState extends State<GridViewOfThalis> {
                   child: Container(
                     child: IconButton(
                       icon: Icon(Icons.lens_rounded),
-                      iconSize: 10,
-                      color: Colors.deepPurpleAccent[800],
+                      iconSize: 15,
+                      color: _curPage != pageIndex
+                          ? Colors.deepPurpleAccent[800]
+                          : Colors.red,
                       onPressed: () => _controller.animateToPage(pageIndex),
                     ),
                   ),

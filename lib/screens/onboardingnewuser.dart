@@ -28,7 +28,7 @@ class _onboardingState extends State<onboarding> {
                   children: [
                     onBoardPage("img6", "Welcome to MNIT canteen"),
                     onBoardPage("img2", "Place your order Now"),
-                    onBoardPage("img2", "Lorem ipsum "),
+                    onBoardPage("img2", "Save your time"),
                   ],
                   onPageChanged: (value) => {setCurrentPage(value)},
                 ),
@@ -68,12 +68,6 @@ class _onboardingState extends State<onboarding> {
                             spreadRadius: 3)
                       ]),
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            Routes.mainLogin,
-                          );
-                        },
                         child: Text(
                           "Get Started",
                           style: TextStyle(fontSize: 16),
@@ -172,6 +166,6 @@ class _onboardingState extends State<onboarding> {
   }
 
   openLoginPage() {
-    // Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    Navigator.pushNamed(context, Routes.mainAuth);
   }
 }

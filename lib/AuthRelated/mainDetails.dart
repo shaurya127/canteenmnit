@@ -4,7 +4,7 @@ import '../widgets/authScreenForm.dart';
 
 import '../Routes/Routes.dart';
 
-class AuthenticationScreen extends StatelessWidget {
+class MainDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -44,8 +44,9 @@ class AuthenticationScreen extends StatelessWidget {
                 ),
                 FlatButton.icon(
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(
+                    Navigator.of(context).pushNamedAndRemoveUntil(
                       Routes.homeScreen,
+                      (route) => false,
                     );
                   },
                   label: Text(

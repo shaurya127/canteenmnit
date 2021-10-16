@@ -6,7 +6,9 @@ class Routes {
   static String adminScreen = "/admin-screen";
 
   // Main Routes
-  static String mainLogin = "main-login";
+  static String selectAuth = "select-auth";
+  static String mainAuth = "main-auth";
+  static String mainDetails = "main-details";
   static String homeScreen = "home-screen";
 
   // Canteen Routes
