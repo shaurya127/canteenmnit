@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_state.dart';
 import 'package:flutter/material.dart';
 
 import '../../dummy_data.dart';
-import 'overviewOfThaliOnGrid.dart';
+import 'overviewOfThaliOnCarousel.dart';
 
 class GridViewOfThalis extends StatefulWidget {
   @override

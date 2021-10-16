@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/ListViewOfFastFood.dart';
-import '../widgets/GridViewOfThalis.dart';
+import '../widgets/CarouselSliderOfThalis.dart';
 
 class ParticularCanteenOverview extends StatelessWidget {
   @override
