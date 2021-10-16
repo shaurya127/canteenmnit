@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../dummy_data.dart';
-import 'fastFoodWidget.dart';
+import 'fastFoodWidgetInListview.dart';
 
 class ListViewOfFastFood extends StatelessWidget {
   @override

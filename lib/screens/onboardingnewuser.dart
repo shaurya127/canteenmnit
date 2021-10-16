@@ -69,7 +69,7 @@ class _onboardingState extends State<onboarding> {
                       ]),
                       child: GestureDetector(
                         child: Text(
-                          "Get Started",
+                          "Login as student",
                           style: TextStyle(fontSize: 16),
                         ),
                       ),

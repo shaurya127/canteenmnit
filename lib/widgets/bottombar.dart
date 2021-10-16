@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mnit_canteen_app/StudentRelated/orderList.dart';
 import '../widgets/userProfile.dart';
 import '../CanteenRelated/widgets/listOfCanteens.dart';
 
@@ -29,6 +30,10 @@ class NavigationBarState extends State<NavigationBar> {
   Widget getScreen() {
     if (_selectedIndex == 0) {
       return ListOfCanteens();
+    }
+
+    if (_selectedIndex == 2) {
+      return OrderList(studentID: "abcd");
     }
 
     if (_selectedIndex == 3) {

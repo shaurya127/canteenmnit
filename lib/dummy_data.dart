@@ -1,3 +1,6 @@
+import 'package:mnit_canteen_app/models/AnyFoodItemOverview.dart';
+import 'package:mnit_canteen_app/models/orderDetailsOverview.dart';
+
 import 'models/FastFoodOverview.dart';
 import 'models/canteenOverview.dart';
 import 'models/thaliOverview.dart';
@@ -45,5 +48,34 @@ final List_of_all_fast_food = [
     name: 'Pizza',
     imageURL: 'assets/images/pizza.png',
     cost: 100,
+  ),
+];
+
+final List_of_orders = [
+  OrderDetailsOverview(
+    'abcd',
+    DateTime.now(),
+    [
+      AnyFoodItemOverview(
+          ID: '1', name: 'pizza', price: 180, isAvailable: true, quantity: 1),
+      AnyFoodItemOverview(
+          ID: '2', name: 'kachori', price: 80, isAvailable: true, quantity: 2),
+      AnyFoodItemOverview(
+          ID: '3', name: 'burger', price: 150, isAvailable: true, quantity: 1),
+      AnyFoodItemOverview(
+          ID: '3', name: 'burger', price: 150, isAvailable: true, quantity: 1),
+      AnyFoodItemOverview(
+          ID: '3', name: 'burger', price: 150, isAvailable: true, quantity: 1),
+      AnyFoodItemOverview(
+          ID: '3', name: 'burger', price: 150, isAvailable: true, quantity: 1),
+    ],
+  ),
+  OrderDetailsOverview(
+    'abcd',
+    DateTime.now(),
+    [
+      AnyFoodItemOverview(
+          ID: '2', name: 'kachori', price: 180, isAvailable: true, quantity: 3),
+    ],
   ),
 ];
