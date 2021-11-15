@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mnit_canteen_app/StudentRelated/orderList.dart';
 import '../widgets/userProfile.dart';
 import '../CanteenRelated/widgets/listOfCanteens.dart';
@@ -20,6 +21,8 @@ class NavigationBarState extends State<NavigationBar> {
     'Profile'
   ];
 
+  final _user = FirebaseAuth.instance.currentUser;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -38,13 +41,7 @@ class NavigationBarState extends State<NavigationBar> {
 
     if (_selectedIndex == 3) {
       return Center(
-        child: UserProfile(
-          name: "Name",
-          email: "abc@xyz.com",
-          hostel: "Kabir Hostel",
-          roomNo: "82(c)",
-          urlOfImage: '',
-        ), //Test user
+        child: UserProfile(uid: _user!.uid), //Test user
       );
     } else {
       return Center(child: Text("To be filled"));

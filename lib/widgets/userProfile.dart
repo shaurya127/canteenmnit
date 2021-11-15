@@ -1,18 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
-  final String name;
-  final String email;
-  final String hostel;
-  final String roomNo;
-  final String urlOfImage;
+  final String uid;
 
-  UserProfile(
-      {required this.name,
-      required this.email,
-      required this.hostel,
-      required this.roomNo,
-      required this.urlOfImage});
+  UserProfile({required this.uid});
 
   @override
   _UserProfileState createState() => _UserProfileState();
@@ -63,113 +56,254 @@ class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 20),
-            child: Text(
-              "Welcome, ${widget.name}",
-              style: TextStyle(color: Colors.grey[800], fontSize: 25),
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            child: Stack(
-              children: [
-                Container(
-                  height: deviceSize.height * 0.2,
-                  width: deviceSize.width * 0.4,
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: new Border.all(
-                      color: (Colors.grey[200])!,
-                      width: 5.0,
-                    ),
-                  ),
-                  child: CircleAvatar(
-                    radius: 50,
-                    backgroundImage:
-                        AssetImage('assets/images/sample-user.png'),
-                  ),
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection("users")
+          .doc(widget.uid)
+          .collection("profile")
+          .snapshots(),
+      builder: (ctx, snap) {
+        if (snap.connectionState == ConnectionState.waiting)
+          return CircularProgressIndicator();
+        Map<String, dynamic> profileData =
+            snap.data!.docs[0].data() as Map<String, dynamic>;
+        return Center(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: Text(
+                  "Welcome, ${profileData["name"].toString().split(" ")[0]}",
+                  style: TextStyle(color: Colors.grey[800], fontSize: 25),
                 ),
-                Positioned(
-                  bottom: 15,
-                  right: 15, //give the values according to your requirement
-                  child: SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: FloatingActionButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      backgroundColor: Colors.white,
-                      onPressed: () {},
-                      child: Icon(
-                        Icons.edit,
-                        size: 18,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: deviceSize.width,
-            margin: EdgeInsets.symmetric(vertical: 20),
-            child: Column(
-              children: [
-                fieldsInUserProfile('Name- ', widget.name, deviceSize),
-                fieldsInUserProfile('Email- ', widget.email, deviceSize),
-                fieldsInUserProfile(
-                    'Hostel- ', widget.hostel, deviceSize, true),
-                fieldsInUserProfile(
-                    'Room no- ', widget.roomNo, deviceSize, true),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: Stack(
                   children: [
-                    Text(
-                      'Do you like this application?',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    TextButton(
-                      child: Text("Yes"),
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.all(0),
+                    Container(
+                      height: deviceSize.height * 0.2,
+                      width: deviceSize.width * 0.4,
+                      decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: new Border.all(
+                          color: (Colors.grey[200])!,
+                          width: 5.0,
+                        ),
+                      ),
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(
+                          "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+                        ),
                       ),
                     ),
-                    TextButton(child: Text("No"), onPressed: () {}),
+                    Positioned(
+                      bottom: 15,
+                      right: 15, //give the values according to your requirement
+                      child: SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: FloatingActionButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5.0),
+                            ),
+                          ),
+                          backgroundColor: Colors.white,
+                          onPressed: () {},
+                          child: Icon(
+                            Icons.edit,
+                            size: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-                Center(
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              (Colors.blue[700])!),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
+              ),
+              Container(
+                width: deviceSize.width,
+                margin: EdgeInsets.symmetric(vertical: 20),
+                child: Column(
+                  children: [
+                    fieldsInUserProfile(
+                      'Name- ',
+                      profileData["name"],
+                      deviceSize,
+                    ),
+                    fieldsInUserProfile(
+                      'Email- ',
+                      profileData["email"],
+                      deviceSize,
+                    ),
+                    fieldsInUserProfile(
+                      'Hostel- ',
+                      profileData["hostelName"],
+                      deviceSize,
+                      true,
+                    ),
+                    fieldsInUserProfile(
+                      'Room no- ',
+                      profileData["roomNo"],
+                      deviceSize,
+                      true,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Do you like this application?',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        TextButton(
+                          child: Text("Yes"),
+                          onPressed: () {},
+                          style: TextButton.styleFrom(
+                            padding: EdgeInsets.all(0),
+                          ),
+                        ),
+                        TextButton(child: Text("No"), onPressed: () {}),
+                      ],
+                    ),
+                    Center(
+                        child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  (Colors.blue[700])!),
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          )),
-                        ),
-                        child: Text(
-                          "Rate this application",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        onPressed: () {}))
-              ],
-            ),
+                                borderRadius: BorderRadius.circular(20),
+                              )),
+                            ),
+                            child: Text(
+                              "Rate this application",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            onPressed: () {}))
+                  ],
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
+    // return Center(
+    //   child: Column(
+    //     children: [
+    //       Container(
+    //         margin: EdgeInsets.symmetric(vertical: 20),
+    //         child: Text(
+    //           "Welcome, ${widget.name}",
+    //           style: TextStyle(color: Colors.grey[800], fontSize: 25),
+    //         ),
+    //       ),
+    //       Container(
+    //         margin: EdgeInsets.symmetric(vertical: 10),
+    //         child: Stack(
+    //           children: [
+    //             Container(
+    //               height: deviceSize.height * 0.2,
+    //               width: deviceSize.width * 0.4,
+    //               decoration: new BoxDecoration(
+    //                 shape: BoxShape.circle,
+    //                 border: new Border.all(
+    //                   color: (Colors.grey[200])!,
+    //                   width: 5.0,
+    //                 ),
+    //               ),
+    //               child: CircleAvatar(
+    //                 radius: 50,
+    //                 backgroundImage:
+    //                     AssetImage('assets/images/sample-user.png'),
+    //               ),
+    //             ),
+    //             Positioned(
+    //               bottom: 15,
+    //               right: 15, //give the values according to your requirement
+    //               child: SizedBox(
+    //                 height: 20,
+    //                 width: 20,
+    //                 child: FloatingActionButton(
+    //                   shape: RoundedRectangleBorder(
+    //                       borderRadius: BorderRadius.all(Radius.circular(5.0))),
+    //                   backgroundColor: Colors.white,
+    //                   onPressed: () {},
+    //                   child: Icon(
+    //                     Icons.edit,
+    //                     size: 18,
+    //                     color: Colors.black,
+    //                   ),
+    //                 ),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //       Container(
+    //         width: deviceSize.width,
+    //         margin: EdgeInsets.symmetric(vertical: 20),
+    //         child: Column(
+    //           children: [
+    //             fieldsInUserProfile('Name- ', widget.name, deviceSize),
+    //             fieldsInUserProfile('Email- ', widget.email, deviceSize),
+    //             fieldsInUserProfile(
+    //                 'Hostel- ', widget.hostel, deviceSize, true),
+    //             fieldsInUserProfile(
+    //                 'Room no- ', widget.roomNo, deviceSize, true),
+    //           ],
+    //         ),
+    //       ),
+    //       Expanded(
+    //         child: Column(
+    //           children: [
+    //             Row(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: [
+    //                 Text(
+    //                   'Do you like this application?',
+    //                   style: TextStyle(fontSize: 18),
+    //                 ),
+    //                 TextButton(
+    //                   child: Text("Yes"),
+    //                   onPressed: () {},
+    //                   style: TextButton.styleFrom(
+    //                     padding: EdgeInsets.all(0),
+    //                   ),
+    //                 ),
+    //                 TextButton(child: Text("No"), onPressed: () {}),
+    //               ],
+    //             ),
+    //             Center(
+    //                 child: ElevatedButton(
+    //                     style: ButtonStyle(
+    //                       backgroundColor: MaterialStateProperty.all<Color>(
+    //                           (Colors.blue[700])!),
+    //                       shape:
+    //                           MaterialStateProperty.all<RoundedRectangleBorder>(
+    //                               RoundedRectangleBorder(
+    //                         borderRadius: BorderRadius.circular(20),
+    //                       )),
+    //                     ),
+    //                     child: Text(
+    //                       "Rate this application",
+    //                       style: TextStyle(color: Colors.white),
+    //                     ),
+    //                     onPressed: () {}))
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }

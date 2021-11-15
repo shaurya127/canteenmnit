@@ -32,11 +32,12 @@ class MainAdminBodyState extends State<MainAdminBody> {
     } else if (_selectedIndex == 2) {
       return Center(
         child: UserProfile(
-          name: "Name",
-          email: "abc@xyz.com",
-          hostel: "Kabir Hostel",
-          roomNo: "82(c)",
-          urlOfImage: '',
+          // name: "Name",
+          // email: "abc@xyz.com",
+          // hostel: "Kabir Hostel",
+          // roomNo: "82(c)",
+          // urlOfImage: '',
+          uid: "",
         ), //Test user
       );
     } else {
