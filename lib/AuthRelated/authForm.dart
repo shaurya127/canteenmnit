@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 
 class AuthForm extends StatefulWidget {
   final Function submitAuthForm;
+  final bool isLoading;
 
-  AuthForm(this.submitAuthForm);
+  AuthForm(this.submitAuthForm, this.isLoading);
 
   @override
   _AuthFormState createState() => _AuthFormState();
@@ -19,6 +20,8 @@ class _AuthFormState extends State<AuthForm> {
   String userHostelName = '';
   String userRoomNo = '';
 
+  bool isLogin = false;
+
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   //Functions
@@ -30,30 +33,18 @@ class _AuthFormState extends State<AuthForm> {
     }
 
     _formKey.currentState!.save();
-    //Here goes the signup logic
-    widget.submitAuthForm(userName, userContact, userEmail, userPassword,
-        userHostelName, userRoomNo, false, context);
-    // _formKey.currentState!.reset();
+    widget.submitAuthForm(
+      userName,
+      userContact,
+      userEmail,
+      userPassword,
+      userHostelName,
+      userRoomNo,
+      isLogin,
+      context,
+    );
 
     return;
-  }
-
-  void _showErrorDialog(String message, BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (ctxDialog) {
-          return AlertDialog(
-            title: Text('An Error Occured!'),
-            content: Text(message),
-            actions: [
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(ctxDialog).pop();
-                  },
-                  child: Text('Back'))
-            ],
-          );
-        });
   }
 
   @override
@@ -64,37 +55,71 @@ class _AuthFormState extends State<AuthForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            margin: EdgeInsets.only(left: 60, right: 60, top: 20, bottom: 5),
-            child: TextFormField(
-              decoration: InputDecoration.collapsed(
-                hintText: 'Name',
-                hintStyle: TextStyle(
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w300,
-                ),
+          if (!isLogin) ...[
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
               ),
-              keyboardType: TextInputType.name,
-              textCapitalization: TextCapitalization.words,
-              style: TextStyle(color: Colors.pink[900]),
-              validator: (valueEnteredByUser) {
-                if (valueEnteredByUser!.isEmpty &&
-                    valueEnteredByUser.length <= 2) {
-                  return 'Invalid name!';
-                } else {
-                  return null;
-                }
-              },
-              onSaved: (valueEnteredByUser) {
-                userName = valueEnteredByUser!;
-              },
+              margin: EdgeInsets.only(left: 60, right: 60, top: 20, bottom: 5),
+              child: TextFormField(
+                key: ValueKey("Name"),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Name',
+                  hintStyle: TextStyle(
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                keyboardType: TextInputType.name,
+                textCapitalization: TextCapitalization.words,
+                style: TextStyle(color: Colors.pink[900]),
+                validator: (valueEnteredByUser) {
+                  if (valueEnteredByUser!.isEmpty &&
+                      valueEnteredByUser.length <= 2) {
+                    return 'Invalid name!';
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (valueEnteredByUser) {
+                  userName = valueEnteredByUser!;
+                },
+              ),
             ),
-          ),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
+              child: TextFormField(
+                key: ValueKey("Contact"),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Contact No.',
+                  hintStyle: TextStyle(
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                keyboardType: TextInputType.phone,
+                style: TextStyle(color: Colors.pink[900]),
+                validator: (valueEnteredByUser) {
+                  if (valueEnteredByUser!.isEmpty &&
+                      valueEnteredByUser.length <= 2) {
+                    return 'Invalid contact no!';
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (valueEnteredByUser) {
+                  userContact = valueEnteredByUser!;
+                },
+              ),
+            ),
+          ],
           Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
@@ -103,36 +128,7 @@ class _AuthFormState extends State<AuthForm> {
             ),
             margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
             child: TextFormField(
-              decoration: InputDecoration.collapsed(
-                hintText: 'Contact No.',
-                hintStyle: TextStyle(
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              keyboardType: TextInputType.phone,
-              style: TextStyle(color: Colors.pink[900]),
-              validator: (valueEnteredByUser) {
-                if (valueEnteredByUser!.isEmpty &&
-                    valueEnteredByUser.length <= 2) {
-                  return 'Invalid contact no!';
-                } else {
-                  return null;
-                }
-              },
-              onSaved: (valueEnteredByUser) {
-                userContact = valueEnteredByUser!;
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
-            child: TextFormField(
+              key: ValueKey("Email"),
               decoration: InputDecoration.collapsed(
                 hintText: 'College Email Id',
                 hintStyle: TextStyle(
@@ -163,6 +159,7 @@ class _AuthFormState extends State<AuthForm> {
             ),
             margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
             child: TextFormField(
+              key: ValueKey("Password"),
               decoration: InputDecoration.collapsed(
                 hintText: 'Password',
                 hintStyle: TextStyle(
@@ -186,86 +183,101 @@ class _AuthFormState extends State<AuthForm> {
               },
             ),
           ),
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
-            child: TextFormField(
-              decoration: InputDecoration.collapsed(
-                hintText: 'Enter Hostel Name',
-                hintStyle: TextStyle(
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w300,
-                ),
+          if (!isLogin) ...[
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
               ),
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.words,
-              style: TextStyle(color: Colors.pink[900]),
-              validator: (valueEnteredByUser) {
-                if (valueEnteredByUser!.isEmpty &&
-                    valueEnteredByUser.length <= 2) {
-                  return 'Invalid hostel!';
-                } else {
-                  return null;
-                }
-              },
-              onSaved: (valueEnteredByUser) {
-                userHostelName = valueEnteredByUser!;
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-            ),
-            margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
-            child: TextFormField(
-              decoration: InputDecoration.collapsed(
-                hintText: 'Room No.',
-                hintStyle: TextStyle(
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w300,
+              margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
+              child: TextFormField(
+                key: ValueKey("Hostel"),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Enter Hostel Name',
+                  hintStyle: TextStyle(
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                style: TextStyle(color: Colors.pink[900]),
+                validator: (valueEnteredByUser) {
+                  if (valueEnteredByUser!.isEmpty &&
+                      valueEnteredByUser.length <= 2) {
+                    return 'Invalid hostel!';
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (valueEnteredByUser) {
+                  userHostelName = valueEnteredByUser!;
+                },
               ),
-              keyboardType: TextInputType.text,
-              textCapitalization: TextCapitalization.words,
-              style: TextStyle(color: Colors.pink[900]),
-              validator: (valueEnteredByUser) {
-                if (valueEnteredByUser!.isEmpty &&
-                    valueEnteredByUser.length <= 2) {
-                  return 'Invalid room!';
-                } else {
-                  return null;
-                }
-              },
-              onSaved: (valueEnteredByUser) {
-                userRoomNo = valueEnteredByUser!;
-              },
             ),
-          ),
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
+              child: TextFormField(
+                key: ValueKey("Room"),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Room No.',
+                  hintStyle: TextStyle(
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                textCapitalization: TextCapitalization.words,
+                style: TextStyle(color: Colors.pink[900]),
+                validator: (valueEnteredByUser) {
+                  if (valueEnteredByUser!.isEmpty &&
+                      valueEnteredByUser.length <= 2) {
+                    return 'Invalid room!';
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (valueEnteredByUser) {
+                  userRoomNo = valueEnteredByUser!;
+                },
+              ),
+            ),
+          ],
           SizedBox(
             height: 30,
           ),
-          ButtonTheme(
-            minWidth: deviceSize.width * 0.85,
-            buttonColor: Colors.blue[900],
-            padding: EdgeInsets.all(10),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              textColor: Colors.white,
-              onPressed: submitForm,
-              child: Text(
-                'Submit',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
-              ),
-            ),
+          FlatButton(
+            onPressed: () {
+              setState(() {
+                isLogin = !isLogin;
+              });
+            },
+            child: Text(isLogin ? "Create new account" : "Login Instead"),
           ),
+          !widget.isLoading
+              ? ButtonTheme(
+                  minWidth: deviceSize.width * 0.85,
+                  buttonColor: Colors.blue[900],
+                  padding: EdgeInsets.all(10),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    textColor: Colors.white,
+                    onPressed: submitForm,
+                    child: Text(
+                      'Submit',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                )
+              : CircularProgressIndicator()
         ],
       ),
     );

@@ -48,7 +48,6 @@ class _MainAuthState extends State<MainAuth> {
           password: password,
         );
       } else {
-        print("hi");
         authResult = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
@@ -73,13 +72,14 @@ class _MainAuthState extends State<MainAuth> {
     } on FirebaseException catch (err) {
       var msg = "An error occurred. Please check your credentials!";
 
-      print(err.code);
       if (err.message != null) {
         msg = err.message!;
-        if (err.code == "ERROR_EMAIL_ALREADY_IN_USE") {
+        if (err.code == "email-already-in-use") {
           msg = "This email is already registered. Try to login.";
-        } else if (err.code == "ERROR_USER_NOT_FOUND") {
+        } else if (err.code == "user-not-found") {
           msg = "Email is not registered. First register then login.";
+        } else if (err.code == "wrong-password") {
+          msg = "Password is incorrect.";
         } else if (err.code == "invalid-email") {
           msg = "Email is incorrect.";
         }
@@ -125,24 +125,25 @@ class _MainAuthState extends State<MainAuth> {
                   ),
                 ),
                 Column(children: [
-                  AuthForm(_submitAuthForm),
+                  AuthForm(_submitAuthForm, _isLoading),
                   SizedBox(
                     height: 10,
                   ),
-                  FlatButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        Routes.homeScreen,
-                        (route) => false,
-                      );
-                    },
-                    label: Text(
-                      'Skip',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                  if (!_isLoading)
+                    FlatButton.icon(
+                      onPressed: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                          Routes.homeScreen,
+                          (route) => false,
+                        );
+                      },
+                      label: Text(
+                        'Skip',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w400),
+                      ),
+                      icon: Icon(Icons.arrow_forward_rounded),
                     ),
-                    icon: Icon(Icons.arrow_forward_rounded),
-                  ),
                 ]),
               ],
             ),
