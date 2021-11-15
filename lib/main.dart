@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:mnit_canteen_app/widgets/authScreenForm.dart';
@@ -22,6 +23,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  String startScreen = Routes.boardingPage;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -47,9 +50,17 @@ class MyApp extends StatelessWidget {
           backgroundColor: Theme.of(context).errorColor,
         ),
       ),
-      home: MyHomePage(
-        titleOfApp:
-            'Canteen MNIT', //From here you can change the title of the app
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (ctx, snap) {
+          if (snap.connectionState == ConnectionState.waiting) {
+            startScreen = Routes.boardingPage;
+          }
+          if (snap.hasData) startScreen = Routes.homeScreen;
+          return MyHomePage(
+            startScreen: startScreen,
+          );
+        },
       ),
       debugShowCheckedModeBanner: false,
       routes: {
@@ -70,8 +81,9 @@ class MyHomePage extends StatefulWidget {
   final titleOfApp;
   final icon;
   final label;
+  final startScreen;
 
-  MyHomePage({this.titleOfApp, this.icon, this.label});
+  MyHomePage({this.titleOfApp, this.icon, this.label, this.startScreen});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -83,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, Routes.boardingPage),
+      () => Navigator.pushReplacementNamed(context, widget.startScreen),
     );
   }
 
