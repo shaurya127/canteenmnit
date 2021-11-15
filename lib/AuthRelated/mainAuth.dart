@@ -27,8 +27,11 @@ class _MainAuthState extends State<MainAuth> {
 
   Future<void> _submitAuthForm(
     String name,
+    String contact,
     String email,
     String password,
+    String hostelName,
+    String roomNo,
     bool isLogin,
     BuildContext ctx,
   ) async {
@@ -45,6 +48,7 @@ class _MainAuthState extends State<MainAuth> {
           password: password,
         );
       } else {
+        print("hi");
         authResult = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
@@ -55,28 +59,32 @@ class _MainAuthState extends State<MainAuth> {
             .collection('profile')
             .add({
           'name': name,
+          'contact': contact,
           'email': email,
+          'hostelName': hostelName,
+          'roomNo': roomNo,
         });
       }
       _showError(ctx, null);
       Navigator.of(context).pushNamedAndRemoveUntil(
-        Routes.mainDetails,
+        Routes.homeScreen,
         (route) => false,
       );
-    } on PlatformException catch (err) {
+    } on FirebaseException catch (err) {
       var msg = "An error occurred. Please check your credentials!";
 
+      print(err.code);
       if (err.message != null) {
         msg = err.message!;
         if (err.code == "ERROR_EMAIL_ALREADY_IN_USE") {
           msg = "This email is already registered. Try to login.";
         } else if (err.code == "ERROR_USER_NOT_FOUND") {
           msg = "Email is not registered. First register then login.";
+        } else if (err.code == "invalid-email") {
+          msg = "Email is incorrect.";
         }
       }
       _showError(ctx, msg);
-    } catch (err) {
-      _showError(ctx, "Internal Server Error");
     }
 
     setState(() {
@@ -117,7 +125,7 @@ class _MainAuthState extends State<MainAuth> {
                   ),
                 ),
                 Column(children: [
-                  AuthForm(),
+                  AuthForm(_submitAuthForm),
                   SizedBox(
                     height: 10,
                   ),
