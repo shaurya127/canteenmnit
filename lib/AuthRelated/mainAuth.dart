@@ -129,21 +129,21 @@ class _MainAuthState extends State<MainAuth> {
                   SizedBox(
                     height: 10,
                   ),
-                  if (!_isLoading)
-                    FlatButton.icon(
-                      onPressed: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                          Routes.homeScreen,
-                          (route) => false,
-                        );
-                      },
-                      label: Text(
-                        'Skip',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w400),
-                      ),
-                      icon: Icon(Icons.arrow_forward_rounded),
-                    ),
+                  // if (!_isLoading)
+                  //   FlatButton.icon(
+                  //     onPressed: () {
+                  //       Navigator.of(context).pushNamedAndRemoveUntil(
+                  //         Routes.homeScreen,
+                  //         (route) => false,
+                  //       );
+                  //     },
+                  //     label: Text(
+                  //       'Skip',
+                  //       style: TextStyle(
+                  //           fontSize: 15, fontWeight: FontWeight.w400),
+                  //     ),
+                  //     icon: Icon(Icons.arrow_forward_rounded),
+                  //   ),
                 ]),
               ],
             ),

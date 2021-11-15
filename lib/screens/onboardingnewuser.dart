@@ -80,7 +80,7 @@ class _onboardingState extends State<onboarding> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacementNamed(
+                      Navigator.pushNamed(
                         context,
                         Routes.adminLogin,
                       );

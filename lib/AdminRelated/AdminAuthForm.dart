@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../dummy_data.dart';
 
 class AdminAuthForm extends StatefulWidget {
+  final Function submitAuthForm;
+  final bool isLoading;
+
+  AdminAuthForm(this.submitAuthForm, this.isLoading);
+
   @override
   _AdminAuthFormState createState() => _AdminAuthFormState();
 }
@@ -10,35 +16,25 @@ class AdminAuthForm extends StatefulWidget {
 class _AdminAuthFormState extends State<AdminAuthForm> {
   String userCanteenName = '';
   String userPassword = '';
+  String userContact = '';
+  bool isLogin = true;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 
   //Functions
   Future<void> submitForm() async {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      //Here goes the signup logic
-      //We can show any error occured here by pointing to _showErrorDialog
+      widget.submitAuthForm(
+        userCanteenName,
+        userPassword,
+        userContact,
+        isLogin,
+        context,
+      );
       return;
     }
-  }
-
-  void _showErrorDialog(String message, BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (ctxDialog) {
-          return AlertDialog(
-            title: Text('An Error Occured!'),
-            content: Text(message),
-            actions: [
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(ctxDialog).pop();
-                  },
-                  child: Text('Back'))
-            ],
-          );
-        });
   }
 
   @override
@@ -59,13 +55,15 @@ class _AdminAuthFormState extends State<AdminAuthForm> {
             margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
             child: TextFormField(
               decoration: InputDecoration.collapsed(
-                hintText: 'Choose Canteen Name',
+                hintText: 'Enter Canteen Name',
                 hintStyle: TextStyle(
                   color: Colors.blue[900],
                   fontWeight: FontWeight.w300,
                 ),
               ),
               keyboardType: TextInputType.text,
+              textCapitalization: TextCapitalization.words,
+              key: ValueKey("name"),
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
                 if (valueEnteredByUser!.isEmpty &&
@@ -96,11 +94,13 @@ class _AdminAuthFormState extends State<AdminAuthForm> {
                 ),
               ),
               keyboardType: TextInputType.text,
+              key: ValueKey("password"),
+              obscureText: true,
               style: TextStyle(color: Colors.pink[900]),
               validator: (valueEnteredByUser) {
                 if (valueEnteredByUser!.isEmpty &&
                     valueEnteredByUser.length <= 2) {
-                  return 'Invalid name!';
+                  return 'Invalid password!';
                 } else {
                   return null;
                 }
@@ -110,8 +110,49 @@ class _AdminAuthFormState extends State<AdminAuthForm> {
               },
             ),
           ),
+          if (!isLogin)
+            Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+              ),
+              margin: EdgeInsets.only(left: 60, right: 60, top: 5, bottom: 5),
+              child: TextFormField(
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Contact No',
+                  hintStyle: TextStyle(
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                keyboardType: TextInputType.number,
+                key: ValueKey("contact"),
+                obscureText: true,
+                style: TextStyle(color: Colors.pink[900]),
+                validator: (valueEnteredByUser) {
+                  if (valueEnteredByUser!.isEmpty &&
+                      valueEnteredByUser.length <= 2) {
+                    return 'Invalid contact!';
+                  } else {
+                    return null;
+                  }
+                },
+                onSaved: (valueEnteredByUser) {
+                  userContact = valueEnteredByUser!;
+                },
+              ),
+            ),
+          FlatButton(
+            onPressed: () {
+              setState(() {
+                isLogin = !isLogin;
+              });
+            },
+            child: Text(isLogin ? "Register new canteen" : "Login Instead"),
+          ),
           SizedBox(
-            height: 30,
+            height: 10,
           ),
           ButtonTheme(
             minWidth: deviceSize.width * 0.85,

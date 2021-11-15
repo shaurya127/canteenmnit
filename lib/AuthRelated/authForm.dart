@@ -249,9 +249,6 @@ class _AuthFormState extends State<AuthForm> {
               ),
             ),
           ],
-          SizedBox(
-            height: 30,
-          ),
           FlatButton(
             onPressed: () {
               setState(() {
@@ -259,6 +256,9 @@ class _AuthFormState extends State<AuthForm> {
               });
             },
             child: Text(isLogin ? "Create new account" : "Login Instead"),
+          ),
+          SizedBox(
+            height: 10,
           ),
           !widget.isLoading
               ? ButtonTheme(
