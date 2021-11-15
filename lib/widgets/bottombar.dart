@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mnit_canteen_app/Routes/Routes.dart';
 import 'package:mnit_canteen_app/StudentRelated/orderList.dart';
 import '../widgets/userProfile.dart';
 import '../CanteenRelated/widgets/listOfCanteens.dart';
@@ -53,6 +54,18 @@ class NavigationBarState extends State<NavigationBar> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_options.elementAt(_selectedIndex)!),
+        actions: [
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                Routes.boardingPage,
+                (route) => false,
+              );
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: getScreen(),
       bottomNavigationBar: BottomNavigationBar(

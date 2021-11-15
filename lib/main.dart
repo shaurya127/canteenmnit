@@ -37,6 +37,9 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
             fontSize: 20,
           ),
+          actionsIconTheme: IconThemeData(
+            color: Colors.white,
+          ),
         ),
         buttonTheme: ButtonThemeData(
           buttonColor: Colors.black,
