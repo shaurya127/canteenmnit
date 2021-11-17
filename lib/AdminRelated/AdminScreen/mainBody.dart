@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mnit_canteen_app/AdminRelated/dishScreen.dart';
 import 'package:mnit_canteen_app/CanteenRelated/screens/particularCanteenOverview.dart';
 
 import '/Routes/Routes.dart';
@@ -33,7 +34,7 @@ class MainAdminBodyState extends State<MainAdminBody> {
   //Returns screen based on _selected index
   Widget getScreen() {
     if (_selectedIndex == 0) {
-      return Container();
+      return DishScreen(uid: _user!.uid);
     } else if (_selectedIndex == 2) {
       return AddDish(uid: _user!.uid);
     } else if (_selectedIndex == 3) {

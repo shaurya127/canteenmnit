@@ -154,21 +154,24 @@ class _AdminAuthFormState extends State<AdminAuthForm> {
           SizedBox(
             height: 10,
           ),
-          ButtonTheme(
-            minWidth: deviceSize.width * 0.85,
-            buttonColor: Colors.blue[900],
-            padding: EdgeInsets.all(10),
-            child: RaisedButton(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              textColor: Colors.white,
-              onPressed: submitForm,
-              child: Text(
-                'Submit',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
-              ),
-            ),
-          ),
+          widget.isLoading
+              ? CircularProgressIndicator()
+              : ButtonTheme(
+                  minWidth: deviceSize.width * 0.85,
+                  buttonColor: Colors.blue[900],
+                  padding: EdgeInsets.all(10),
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    textColor: Colors.white,
+                    onPressed: submitForm,
+                    child: Text(
+                      'Submit',
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ),
         ],
       ),
     );

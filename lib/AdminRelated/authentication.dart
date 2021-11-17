@@ -129,16 +129,16 @@ class _AdminAuthenticationState extends State<AdminAuthentication> {
                 SizedBox(
                   height: 10,
                 ),
-                FlatButton.icon(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, Routes.adminScreen);
-                  },
-                  label: Text(
-                    'Skip',
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
-                  ),
-                  icon: Icon(Icons.arrow_forward_rounded),
-                ),
+                // FlatButton.icon(
+                //   onPressed: () {
+                //     Navigator.pushReplacementNamed(context, Routes.adminScreen);
+                //   },
+                //   label: Text(
+                //     'Skip',
+                //     style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
+                //   ),
+                //   icon: Icon(Icons.arrow_forward_rounded),
+                // ),
               ]),
             ],
           ),

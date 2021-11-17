@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../../dummy_data.dart';
 import 'fastFoodWidgetInListview.dart';
 
 class ListViewOfFastFood extends StatelessWidget {
