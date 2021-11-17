@@ -3,16 +3,14 @@ import 'package:flutter/material.dart';
 import '../../Routes/Routes.dart';
 
 class CanteenDetailsOnMainScreen extends StatelessWidget {
-  final String nameOfCanteen;
-  final String imageURL;
+  final dynamic canteen;
 
-  CanteenDetailsOnMainScreen(
-      {required this.nameOfCanteen, required this.imageURL});
+  CanteenDetailsOnMainScreen({required this.canteen});
 
   void displayTheCanteen(BuildContext context) {
     Navigator.of(context).pushNamed(
       Routes.canteenDetail,
-      arguments: {'nameOfCanteen': nameOfCanteen, 'imageURL': imageURL},
+      arguments: {'canteen': canteen},
     );
   }
 
@@ -32,7 +30,7 @@ class CanteenDetailsOnMainScreen extends StatelessWidget {
                   color: Colors.white, borderRadius: BorderRadius.circular(10)),
               padding: const EdgeInsets.all(5),
               child: Text(
-                nameOfCanteen,
+                canteen.data()["name"],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Colors.blue,
@@ -43,7 +41,8 @@ class CanteenDetailsOnMainScreen extends StatelessWidget {
       ),
       decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(imageURL),
+            image: NetworkImage(
+                "https://cdn-icons-png.flaticon.com/512/149/149071.png"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(10)),

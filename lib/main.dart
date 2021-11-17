@@ -1,3 +1,15 @@
+/*
+Login Credentials:
+
+1. User
+    2020UCP1801@mnit.ac.in
+    saksham
+
+2. Admin
+    Annapurna
+    annapurna
+*/
+
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -61,20 +73,17 @@ class MyApp extends StatelessWidget {
             startScreen = Routes.boardingPage;
           }
           if (snap.hasData) {
-            // final user = FirebaseAuth.instance.currentUser!.uid;
-            // print(user);
-            // final cl = FirebaseFirestore.instance
-            //     .collection("/canteens")
-            //     // .where('uid', isEqualTo: user)
-            //     // .doc(user)
-            //     .get()
-            //     .then((value) {
-            //   // print(value.data());
-            //   print(value.docs);
-            //   value.docs.forEach((element) {
-            //     print(element);
-            //   });
-            // });
+            final user = FirebaseAuth.instance.currentUser!.uid;
+            final cl = FirebaseFirestore.instance
+                .collection("users")
+                .doc(user)
+                .get()
+                .then((value) {
+              if (value.exists)
+                startScreen = Routes.homeScreen;
+              else
+                startScreen = Routes.adminScreen;
+            });
           }
           return MyHomePage();
         },

@@ -7,9 +7,9 @@ class ParticularCanteenOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     final routeArguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    final nameOfCanteen = routeArguments['nameOfCanteen'];
-    final imageURL = routeArguments['imageURL'];
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final canteen = routeArguments["canteen"];
+    final nameOfCanteen = canteen.data()["name"];
 
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
@@ -54,7 +54,7 @@ class ParticularCanteenOverview extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              ListViewOfFastFood(),
+              ListViewOfFastFood(canteen: canteen),
             ],
           ),
         ),

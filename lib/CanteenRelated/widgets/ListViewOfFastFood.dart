@@ -1,26 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../dummy_data.dart';
 import 'fastFoodWidgetInListview.dart';
 
 class ListViewOfFastFood extends StatelessWidget {
+  final dynamic canteen;
+
+  ListViewOfFastFood({required this.canteen});
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: RawScrollbar(
-        isAlwaysShown: true,
-        thumbColor: Colors.blue,
-        thickness: 10,
-        child: ListView.builder(
-          itemBuilder: (ctx, index) {
-            return FastFoodWidget(
-              nameOfFastFood: List_of_all_fast_food[index].name,
-              imageURL: List_of_all_fast_food[index].imageURL,
-              cost: List_of_all_fast_food[index].cost,
-            );
-          },
-          itemCount: List_of_all_fast_food.length,
-        ),
-      ),
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection("canteens")
+          .doc(canteen.id)
+          .collection("dishes")
+          .snapshots(),
+      builder: (ctx, snap) {
+        if (snap.connectionState == ConnectionState.waiting)
+          return CircularProgressIndicator();
+        final dishData = snap.data!.docs;
+        return Expanded(
+          child: RawScrollbar(
+            isAlwaysShown: true,
+            thumbColor: Colors.blue,
+            thickness: 10,
+            child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return FastFoodWidget(
+                  dish: dishData[index],
+                );
+              },
+              itemCount: dishData.length,
+            ),
+          ),
+        );
+      },
     );
   }
 }

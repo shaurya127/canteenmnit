@@ -54,6 +54,10 @@ class _AdminAuthenticationState extends State<AdminAuthentication> {
         await FirebaseFirestore.instance
             .collection('canteens')
             .doc(authResult.user!.uid)
+            .set({'name': canteenName});
+        await FirebaseFirestore.instance
+            .collection('canteens')
+            .doc(authResult.user!.uid)
             .collection('profile')
             .add({
           'name': canteenName,

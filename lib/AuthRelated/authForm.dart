@@ -20,7 +20,7 @@ class _AuthFormState extends State<AuthForm> {
   String userHostelName = '';
   String userRoomNo = '';
 
-  bool isLogin = false;
+  bool isLogin = true;
 
   final GlobalKey<FormState> _formKey = GlobalKey();
 

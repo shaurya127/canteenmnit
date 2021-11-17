@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mnit_canteen_app/CanteenRelated/screens/particularCanteenOverview.dart';
 
 import '/Routes/Routes.dart';
 import '../add_dish.dart';
@@ -17,6 +18,7 @@ class MainAdminBodyState extends State<MainAdminBody> {
   final _user = FirebaseAuth.instance.currentUser;
 
   static const List<String?> _options = [
+    'Dishes',
     'Orders',
     'Add Dish',
     'Profile',
@@ -30,9 +32,11 @@ class MainAdminBodyState extends State<MainAdminBody> {
 
   //Returns screen based on _selected index
   Widget getScreen() {
-    if (_selectedIndex == 1) {
-      return AddDish();
+    if (_selectedIndex == 0) {
+      return Container();
     } else if (_selectedIndex == 2) {
+      return AddDish(uid: _user!.uid);
+    } else if (_selectedIndex == 3) {
       return Center(
         child: UserProfile(
           uid: _user!.uid,
@@ -66,11 +70,15 @@ class MainAdminBodyState extends State<MainAdminBody> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_shopping_cart),
+            icon: Icon(Icons.restaurant),
+            label: "Dishes",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart),
             label: "Orders",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
+            icon: Icon(Icons.add_box),
             label: "Add Dish",
           ),
           BottomNavigationBarItem(

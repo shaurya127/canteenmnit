@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AddDish extends StatefulWidget {
+  final String uid;
+
+  const AddDish({required this.uid});
+
   @override
   _AddDishState createState() => _AddDishState();
 }
@@ -51,13 +55,9 @@ class _AddDishState extends State<AddDish> {
     });
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      await FirebaseFirestore.instance.collection('dishes').add({
-        'img': _img,
-        'name': _name,
-        'price': _price,
-        'description': _desc,
-      });
-      print({
+      await FirebaseFirestore.instance
+          .collection('canteens/${widget.uid}/dishes')
+          .add({
         'img': _img,
         'name': _name,
         'price': _price,
@@ -65,6 +65,13 @@ class _AddDishState extends State<AddDish> {
       });
       _formKey.currentState!.reset();
     }
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Added succesfully"),
+        backgroundColor: Colors.green,
+      ),
+    );
     setState(() {
       _isLoading = false;
     });

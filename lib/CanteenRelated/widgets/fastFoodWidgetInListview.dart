@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
 
 class FastFoodWidget extends StatelessWidget {
-  final String nameOfFastFood;
-  final String imageURL;
-  final int cost;
+  final dynamic dish;
 
-  FastFoodWidget({
-    required this.nameOfFastFood,
-    required this.imageURL,
-    required this.cost,
-  });
+  FastFoodWidget({required this.dish});
 
   @override
   Widget build(BuildContext context) {
@@ -20,46 +14,26 @@ class FastFoodWidget extends StatelessWidget {
           elevation: 5,
           child: Padding(
             padding: EdgeInsets.only(top: 5, bottom: 5, left: 10, right: 30),
-            // child: ListTile(
-            //   leading: CircleAvatar(
-            //     backgroundImage: AssetImage(imageURL),
-            //     radius: 30,
-            //   ),
-            //   // trailing: Text("Rs. $cost/-",
-            //   //     // textAlign: TextAlign.center,
-            //   //     style: TextStyle(
-            //   //         fontSize: 10,
-            //   //         fontWeight: FontWeight.w600,
-            //   //         color: Colors.blue[900])),
-            //   trailing: CircleAvatar(
-            //     child: Text("$cost /-",
-            //         // textAlign: TextAlign.center,
-            //         style: TextStyle(
-            //             fontSize: 10,
-            //             fontWeight: FontWeight.w600,
-            //             color: Colors.blue[900])),
-            //   ),
-            // )
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   child: Row(children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage(imageURL),
+                      backgroundImage: NetworkImage(dish.data()["img"]),
                       radius: 30,
                     ),
                     SizedBox(
                       width: 10,
                     ),
-                    Text(nameOfFastFood,
+                    Text(dish.data()["name"],
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.blue[900])),
                   ]),
                 ),
-                Text("Rs. $cost/-",
+                Text("Rs. ${dish.data()["price"]}/-",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 10,

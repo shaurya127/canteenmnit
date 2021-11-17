@@ -55,6 +55,10 @@ class _MainAuthState extends State<MainAuth> {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user!.uid)
+            .set({'email': email});
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(authResult.user!.uid)
             .collection('profile')
             .add({
           'name': name,
