@@ -54,24 +54,27 @@ class MyApp extends StatelessWidget {
           backgroundColor: Theme.of(context).errorColor,
         ),
       ),
-      home: StreamBuilder(
+      home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (ctx, snap) {
           if (snap.connectionState == ConnectionState.waiting) {
             startScreen = Routes.boardingPage;
           }
           if (snap.hasData) {
-            final user = FirebaseAuth.instance.currentUser!.uid;
-            FirebaseFirestore.instance
-                .collection("canteens")
-                .doc(user)
-                .get()
-                .then((onexists) {
-              if (onexists.id == user)
-                startScreen = Routes.adminScreen;
-              else
-                startScreen = Routes.homeScreen;
-            });
+            // final user = FirebaseAuth.instance.currentUser!.uid;
+            // print(user);
+            // final cl = FirebaseFirestore.instance
+            //     .collection("/canteens")
+            //     // .where('uid', isEqualTo: user)
+            //     // .doc(user)
+            //     .get()
+            //     .then((value) {
+            //   // print(value.data());
+            //   print(value.docs);
+            //   value.docs.forEach((element) {
+            //     print(element);
+            //   });
+            // });
           }
           return MyHomePage();
         },

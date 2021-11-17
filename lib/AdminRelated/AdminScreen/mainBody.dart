@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '/Routes/Routes.dart';
 import '../add_dish.dart';
 import '../../widgets/userProfile.dart';
 
@@ -12,6 +14,7 @@ class MainAdminBody extends StatefulWidget {
 
 class MainAdminBodyState extends State<MainAdminBody> {
   int _selectedIndex = 0;
+  final _user = FirebaseAuth.instance.currentUser;
 
   static const List<String?> _options = [
     'Orders',
@@ -32,13 +35,9 @@ class MainAdminBodyState extends State<MainAdminBody> {
     } else if (_selectedIndex == 2) {
       return Center(
         child: UserProfile(
-          // name: "Name",
-          // email: "abc@xyz.com",
-          // hostel: "Kabir Hostel",
-          // roomNo: "82(c)",
-          // urlOfImage: '',
-          uid: "",
-        ), //Test user
+          uid: _user!.uid,
+          admin: true,
+        ),
       );
     } else {
       return Center(child: Text("To be filled"));
@@ -50,6 +49,18 @@ class MainAdminBodyState extends State<MainAdminBody> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_options.elementAt(_selectedIndex)!),
+        actions: [
+          IconButton(
+            onPressed: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                Routes.boardingPage,
+                (route) => false,
+              );
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: getScreen(),
       bottomNavigationBar: BottomNavigationBar(

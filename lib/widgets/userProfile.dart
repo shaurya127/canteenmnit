@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatefulWidget {
   final String uid;
+  final bool admin;
 
-  UserProfile({required this.uid});
+  UserProfile({required this.uid, this.admin = false});
 
   @override
   _UserProfileState createState() => _UserProfileState();
@@ -58,7 +58,7 @@ class _UserProfileState extends State<UserProfile> {
     final deviceSize = MediaQuery.of(context).size;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection("users")
+          .collection(widget.admin ? "canteens" : "users")
           .doc(widget.uid)
           .collection("profile")
           .snapshots(),
@@ -133,23 +133,31 @@ class _UserProfileState extends State<UserProfile> {
                       profileData["name"],
                       deviceSize,
                     ),
-                    fieldsInUserProfile(
-                      'Email- ',
-                      profileData["email"],
-                      deviceSize,
-                    ),
-                    fieldsInUserProfile(
-                      'Hostel- ',
-                      profileData["hostelName"],
-                      deviceSize,
-                      true,
-                    ),
-                    fieldsInUserProfile(
-                      'Room no- ',
-                      profileData["roomNo"],
-                      deviceSize,
-                      true,
-                    ),
+                    if (!widget.admin) ...[
+                      fieldsInUserProfile(
+                        'Email- ',
+                        profileData["email"],
+                        deviceSize,
+                      ),
+                      fieldsInUserProfile(
+                        'Hostel- ',
+                        profileData["hostelName"],
+                        deviceSize,
+                        true,
+                      ),
+                      fieldsInUserProfile(
+                        'Room no- ',
+                        profileData["roomNo"],
+                        deviceSize,
+                        true,
+                      ),
+                    ] else ...[
+                      fieldsInUserProfile(
+                        'Contact- ',
+                        profileData["contact"],
+                        deviceSize,
+                      ),
+                    ]
                   ],
                 ),
               ),
