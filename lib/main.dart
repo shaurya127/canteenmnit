@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,9 +23,9 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  String startScreen = Routes.boardingPage;
+String startScreen = Routes.boardingPage;
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,10 +60,20 @@ class MyApp extends StatelessWidget {
           if (snap.connectionState == ConnectionState.waiting) {
             startScreen = Routes.boardingPage;
           }
-          if (snap.hasData) startScreen = Routes.homeScreen;
-          return MyHomePage(
-            startScreen: startScreen,
-          );
+          if (snap.hasData) {
+            final user = FirebaseAuth.instance.currentUser!.uid;
+            FirebaseFirestore.instance
+                .collection("canteens")
+                .doc(user)
+                .get()
+                .then((onexists) {
+              if (onexists.id == user)
+                startScreen = Routes.adminScreen;
+              else
+                startScreen = Routes.homeScreen;
+            });
+          }
+          return MyHomePage();
         },
       ),
       debugShowCheckedModeBanner: false,
@@ -84,9 +95,8 @@ class MyHomePage extends StatefulWidget {
   final titleOfApp;
   final icon;
   final label;
-  final startScreen;
 
-  MyHomePage({this.titleOfApp, this.icon, this.label, this.startScreen});
+  MyHomePage({this.titleOfApp, this.icon, this.label});
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -98,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     Timer(
       Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, widget.startScreen),
+      () => Navigator.pushReplacementNamed(context, startScreen),
     );
   }
 
