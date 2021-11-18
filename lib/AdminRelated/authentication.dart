@@ -62,6 +62,8 @@ class _AdminAuthenticationState extends State<AdminAuthentication> {
             .add({
           'name': canteenName,
           'contact': contact,
+          'imgUrl':
+              "https://png.pngtree.com/png-vector/20190909/ourmid/pngtree-restaurant-icon-vector-png-image_1726774.jpg",
         });
       }
       _showError(ctx, null);

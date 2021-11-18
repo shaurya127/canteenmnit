@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserProfile extends StatefulWidget {
   final String uid;
@@ -12,6 +16,8 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  File? imgChosen;
+
   Widget renderIconInField(deviceSize) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: deviceSize.width * 0.02),
@@ -50,6 +56,77 @@ class _UserProfileState extends State<UserProfile> {
             ? renderIconInField(deviceSize)
             : new Container(width: 0, height: 0)
       ]),
+    );
+  }
+
+  void changeImg(File? image, String id) async {
+    final ref = FirebaseStorage.instance;
+    var url;
+    if (image != null) {
+      List<String> l1 = image.path.split(".");
+      final refImg = ref
+          .ref()
+          .child('user_images')
+          .child(widget.uid + '.${l1[l1.length - 1]}');
+      await refImg.putFile(image);
+      url = await refImg.getDownloadURL();
+    }
+    print(url);
+    await FirebaseFirestore.instance
+        .collection(widget.admin ? "canteens" : "users")
+        .doc(widget.uid)
+        .collection("profile")
+        .doc(id)
+        .update({
+      'imgUrl': url,
+    });
+  }
+
+  void _pickImg(int choice, String id) async {
+    final ImagePicker _picker = ImagePicker();
+    final pickedImgFile = await _picker.pickImage(
+      source: choice == 1 ? ImageSource.camera : ImageSource.gallery,
+      imageQuality: 50,
+      maxWidth: 150,
+    );
+    print(pickedImgFile!.path);
+    setState(() {
+      if (pickedImgFile != null) {
+        imgChosen = File(pickedImgFile.path);
+      }
+    });
+    changeImg(imgChosen, id);
+  }
+
+  void _chooseOptionToPick(String id) {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => Container(
+        margin: EdgeInsets.all(20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            FlatButton.icon(
+              icon: Icon(Icons.camera_alt, size: 40),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+                _pickImg(1, id);
+              },
+              label: Text("Camera"),
+              textColor: Theme.of(context).accentColor,
+            ),
+            FlatButton.icon(
+              icon: Icon(Icons.photo, size: 40),
+              onPressed: () {
+                Navigator.of(ctx).pop();
+                _pickImg(2, id);
+              },
+              label: Text("Gallery"),
+              textColor: Theme.of(context).accentColor,
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -93,9 +170,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: NetworkImage(
-                          "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-                        ),
+                        backgroundImage: NetworkImage(profileData["imgUrl"]),
                       ),
                     ),
                     Positioned(
@@ -111,7 +186,8 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                           ),
                           backgroundColor: Colors.white,
-                          onPressed: () {},
+                          onPressed: () =>
+                              _chooseOptionToPick(snap.data!.docs[0].id),
                           child: Icon(
                             Icons.edit,
                             size: 18,
@@ -133,6 +209,11 @@ class _UserProfileState extends State<UserProfile> {
                       profileData["name"],
                       deviceSize,
                     ),
+                    fieldsInUserProfile(
+                      'Contact- ',
+                      profileData["contact"],
+                      deviceSize,
+                    ),
                     if (!widget.admin) ...[
                       fieldsInUserProfile(
                         'Email- ',
@@ -150,12 +231,6 @@ class _UserProfileState extends State<UserProfile> {
                         profileData["roomNo"],
                         deviceSize,
                         true,
-                      ),
-                    ] else ...[
-                      fieldsInUserProfile(
-                        'Contact- ',
-                        profileData["contact"],
-                        deviceSize,
                       ),
                     ]
                   ],

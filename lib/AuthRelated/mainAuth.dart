@@ -66,6 +66,7 @@ class _MainAuthState extends State<MainAuth> {
           'email': email,
           'hostelName': hostelName,
           'roomNo': roomNo,
+          'imgUrl': "https://cdn-icons-png.flaticon.com/512/149/149071.png",
         });
       }
       _showError(ctx, null);
