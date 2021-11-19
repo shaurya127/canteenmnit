@@ -128,7 +128,6 @@ class _AdminAuthFormState extends State<AdminAuthForm> {
                 ),
                 keyboardType: TextInputType.number,
                 key: ValueKey("contact"),
-                obscureText: true,
                 style: TextStyle(color: Colors.pink[900]),
                 validator: (valueEnteredByUser) {
                   if (valueEnteredByUser!.isEmpty &&

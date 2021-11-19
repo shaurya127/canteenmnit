@@ -59,7 +59,7 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
-  void changeImg(File? image, String id) async {
+  void changeImg(File? image) async {
     final ref = FirebaseStorage.instance;
     var url;
     if (image != null) {
@@ -71,34 +71,30 @@ class _UserProfileState extends State<UserProfile> {
       await refImg.putFile(image);
       url = await refImg.getDownloadURL();
     }
-    print(url);
     await FirebaseFirestore.instance
         .collection(widget.admin ? "canteens" : "users")
         .doc(widget.uid)
-        .collection("profile")
-        .doc(id)
         .update({
       'imgUrl': url,
     });
   }
 
-  void _pickImg(int choice, String id) async {
+  void _pickImg(int choice) async {
     final ImagePicker _picker = ImagePicker();
     final pickedImgFile = await _picker.pickImage(
       source: choice == 1 ? ImageSource.camera : ImageSource.gallery,
       imageQuality: 50,
       maxWidth: 150,
     );
-    print(pickedImgFile!.path);
     setState(() {
       if (pickedImgFile != null) {
         imgChosen = File(pickedImgFile.path);
+        changeImg(imgChosen);
       }
     });
-    changeImg(imgChosen, id);
   }
 
-  void _chooseOptionToPick(String id) {
+  void _chooseOptionToPick() {
     showModalBottomSheet(
       context: context,
       builder: (ctx) => Container(
@@ -110,7 +106,7 @@ class _UserProfileState extends State<UserProfile> {
               icon: Icon(Icons.camera_alt, size: 40),
               onPressed: () {
                 Navigator.of(ctx).pop();
-                _pickImg(1, id);
+                _pickImg(1);
               },
               label: Text("Camera"),
               textColor: Theme.of(context).accentColor,
@@ -119,7 +115,7 @@ class _UserProfileState extends State<UserProfile> {
               icon: Icon(Icons.photo, size: 40),
               onPressed: () {
                 Navigator.of(ctx).pop();
-                _pickImg(2, id);
+                _pickImg(2);
               },
               label: Text("Gallery"),
               textColor: Theme.of(context).accentColor,
@@ -130,20 +126,33 @@ class _UserProfileState extends State<UserProfile> {
     );
   }
 
+  ImageProvider getImgUrl(String? img) {
+    if (imgChosen != null) return FileImage(imgChosen!);
+    return img != null
+        ? FadeInImage(
+            placeholder: Image.asset("assets/images/" +
+                    (widget.admin ? "Canteenmnit-logo.jpg" : "profile-img.png"))
+                .image,
+            image: NetworkImage(img),
+          ).image
+        : Image.asset("assets/images/" +
+                (widget.admin ? "Canteenmnit-logo.jpg" : "profile-img.png"))
+            .image;
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    return StreamBuilder<QuerySnapshot>(
+    return StreamBuilder<DocumentSnapshot>(
       stream: FirebaseFirestore.instance
           .collection(widget.admin ? "canteens" : "users")
           .doc(widget.uid)
-          .collection("profile")
           .snapshots(),
       builder: (ctx, snap) {
         if (snap.connectionState == ConnectionState.waiting)
           return CircularProgressIndicator();
         Map<String, dynamic> profileData =
-            snap.data!.docs[0].data() as Map<String, dynamic>;
+            snap.data!.data() as Map<String, dynamic>;
         return Center(
           child: Column(
             children: [
@@ -170,7 +179,7 @@ class _UserProfileState extends State<UserProfile> {
                       ),
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: NetworkImage(profileData["imgUrl"]),
+                        backgroundImage: getImgUrl(profileData["imgUrl"]),
                       ),
                     ),
                     Positioned(
@@ -186,8 +195,7 @@ class _UserProfileState extends State<UserProfile> {
                             ),
                           ),
                           backgroundColor: Colors.white,
-                          onPressed: () =>
-                              _chooseOptionToPick(snap.data!.docs[0].id),
+                          onPressed: _chooseOptionToPick,
                           child: Icon(
                             Icons.edit,
                             size: 18,

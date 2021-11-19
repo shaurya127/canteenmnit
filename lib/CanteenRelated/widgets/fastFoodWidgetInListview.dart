@@ -20,7 +20,7 @@ class FastFoodWidget extends StatelessWidget {
                 Container(
                   child: Row(children: [
                     CircleAvatar(
-                      backgroundImage: NetworkImage(dish.data()["img"]),
+                      backgroundImage: NetworkImage(dish.data()["imgUrl"]),
                       radius: 30,
                     ),
                     SizedBox(

@@ -55,18 +55,13 @@ class _MainAuthState extends State<MainAuth> {
         await FirebaseFirestore.instance
             .collection('users')
             .doc(authResult.user!.uid)
-            .set({'email': email});
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(authResult.user!.uid)
-            .collection('profile')
-            .add({
+            .set({
           'name': name,
           'contact': contact,
           'email': email,
           'hostelName': hostelName,
           'roomNo': roomNo,
-          'imgUrl': "https://cdn-icons-png.flaticon.com/512/149/149071.png",
+          'imgUrl': null,
         });
       }
       _showError(ctx, null);

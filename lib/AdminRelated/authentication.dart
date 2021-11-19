@@ -54,16 +54,10 @@ class _AdminAuthenticationState extends State<AdminAuthentication> {
         await FirebaseFirestore.instance
             .collection('canteens')
             .doc(authResult.user!.uid)
-            .set({'name': canteenName});
-        await FirebaseFirestore.instance
-            .collection('canteens')
-            .doc(authResult.user!.uid)
-            .collection('profile')
-            .add({
+            .set({
           'name': canteenName,
           'contact': contact,
-          'imgUrl':
-              "https://png.pngtree.com/png-vector/20190909/ourmid/pngtree-restaurant-icon-vector-png-image_1726774.jpg",
+          'imgUrl': null,
         });
       }
       _showError(ctx, null);
