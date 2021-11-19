@@ -18,27 +18,35 @@ class FastFoodWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  child: Row(children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(dish.data()["imgUrl"]),
-                      radius: 30,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(dish.data()["name"],
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(dish.data()["imgUrl"]),
+                        radius: 30,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        dish.data()["name"],
                         style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.blue[900])),
-                  ]),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.blue[900],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                Text("Rs. ${dish.data()["price"]}/-",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.blue[900])),
+                Text(
+                  "Rs. ${dish.data()["price"]}/-",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue[900],
+                  ),
+                ),
               ],
             ),
           )),

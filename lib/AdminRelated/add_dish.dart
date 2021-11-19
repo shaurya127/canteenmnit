@@ -71,9 +71,7 @@ class _AddDishState extends State<AddDish> {
         'name': _name,
         'price': _price,
         'description': _desc,
-        'imgUrl': url == null
-            ? "https://png.pngtree.com/png-vector/20190909/ourmid/pngtree-restaurant-icon-vector-png-image_1726774.jpg"
-            : url
+        'imgUrl': url
       });
       _formKey.currentState!.reset();
       ScaffoldMessenger.of(context).hideCurrentSnackBar();

@@ -92,11 +92,15 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.boardingPage: (ctx) => onboarding(),
         Routes.adminLogin: (ctx) => AdminAuthentication(),
-        Routes.adminScreen: (ctx) => AdminScreen(),
+        Routes.adminScreen: (ctx) => AdminScreen(
+              uid: FirebaseAuth.instance.currentUser!.uid,
+            ),
         Routes.selectAuth: (ctx) => SelectAuth(),
         Routes.mainAuth: (ctx) => MainAuth(),
         Routes.mainDetails: (ctx) => MainDetail(),
-        Routes.homeScreen: (ctx) => HomeScreen(),
+        Routes.homeScreen: (ctx) => HomeScreen(
+              uid: FirebaseAuth.instance.currentUser!.uid,
+            ),
         Routes.canteenDetail: (ctx) => ParticularCanteenOverview(),
       },
     );

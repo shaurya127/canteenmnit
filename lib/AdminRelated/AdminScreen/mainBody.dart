@@ -8,7 +8,14 @@ import '../add_dish.dart';
 import '../../widgets/userProfile.dart';
 
 class MainAdminBody extends StatefulWidget {
-  MainAdminBody({Key? key}) : super(key: key);
+  final String uid;
+  final Map<String, dynamic> userData;
+
+  MainAdminBody({
+    Key? key,
+    required this.uid,
+    required this.userData,
+  }) : super(key: key);
 
   @override
   MainAdminBodyState createState() => MainAdminBodyState();
@@ -16,7 +23,6 @@ class MainAdminBody extends StatefulWidget {
 
 class MainAdminBodyState extends State<MainAdminBody> {
   int _selectedIndex = 0;
-  final _user = FirebaseAuth.instance.currentUser;
 
   static const List<String?> _options = [
     'Dishes',
@@ -34,13 +40,14 @@ class MainAdminBodyState extends State<MainAdminBody> {
   //Returns screen based on _selected index
   Widget getScreen() {
     if (_selectedIndex == 0) {
-      return DishScreen(uid: _user!.uid);
+      return DishScreen(uid: widget.uid);
     } else if (_selectedIndex == 2) {
-      return AddDish(uid: _user!.uid);
+      return AddDish(uid: widget.uid);
     } else if (_selectedIndex == 3) {
       return Center(
         child: UserProfile(
-          uid: _user!.uid,
+          uid: widget.uid,
+          userData: widget.userData,
           admin: true,
         ),
       );

@@ -6,7 +6,14 @@ import '../widgets/userProfile.dart';
 import '../CanteenRelated/widgets/listOfCanteens.dart';
 
 class NavigationBar extends StatefulWidget {
-  NavigationBar({Key? key}) : super(key: key);
+  final String uid;
+  final Map<String, dynamic> userData;
+
+  NavigationBar({
+    Key? key,
+    required this.uid,
+    required this.userData,
+  }) : super(key: key);
 
   @override
   NavigationBarState createState() => NavigationBarState();
@@ -21,8 +28,6 @@ class NavigationBarState extends State<NavigationBar> {
     'Order Lists',
     'Profile'
   ];
-
-  final _user = FirebaseAuth.instance.currentUser;
 
   void _onItemTapped(int index) {
     setState(() {
@@ -42,7 +47,10 @@ class NavigationBarState extends State<NavigationBar> {
 
     if (_selectedIndex == 3) {
       return Center(
-        child: UserProfile(uid: _user!.uid), //Test user
+        child: UserProfile(
+          uid: widget.uid,
+          userData: widget.userData,
+        ), //Test user
       );
     } else {
       return Center(child: Text("To be filled"));

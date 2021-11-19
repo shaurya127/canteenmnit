@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mnit_canteen_app/models/Loader.dart';
 import '../../CanteenRelated/widgets/canteenDetailsOnMainScreen.dart';
 import '../../dummy_data.dart';
 
@@ -9,10 +10,7 @@ class ListOfCanteens extends StatelessWidget {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection("canteens").snapshots(),
       builder: (ctx, snap) {
-        if (snap.connectionState == ConnectionState.waiting)
-          return Center(
-            child: CircularProgressIndicator(),
-          );
+        if (snap.connectionState == ConnectionState.waiting) return Loader();
         final List<dynamic> canteenData = snap.data!.docs;
         return Container(
           margin: EdgeInsets.only(top: 20),
