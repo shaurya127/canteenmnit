@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mnit_canteen_app/models/getImage.dart';
 
 class FastFoodWidget extends StatelessWidget {
   final dynamic dish;
@@ -21,7 +22,11 @@ class FastFoodWidget extends StatelessWidget {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(dish.data()["imgUrl"]),
+                        backgroundImage: getImgUrl(
+                          dish.data()["imgUrl"],
+                          null,
+                          true,
+                        ),
                         radius: 30,
                       ),
                       SizedBox(
