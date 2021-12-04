@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mnit_canteen_app/models/Loader.dart';
 
-import '../widgets/bottombar.dart';
+import '../widgets/bottombar.dart' as bottomBar;
 
 class HomeScreen extends StatelessWidget {
   final String uid;
@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
         builder: (ctx, snap) {
           if (snap.connectionState == ConnectionState.waiting) return Loader();
           final userData = snap.data!.data() as Map<String, dynamic>;
-          return NavigationBar(uid: uid, userData: userData);
+          return bottomBar.NavigationBar(uid: uid, userData: userData);
         },
       ),
     );
